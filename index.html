@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-  <title>Evan-moor Homework</title>
+  <title>EVAN-MOOR Homework</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
@@ -16,19 +16,21 @@
 <body>
   <div id="root"></div>
   <script type="text/babel" data-presets="react">
+const { useState, useEffect, useCallback, useMemo } = React;
+
 
 /* ── fonts & styles ── */
 (() => {
   if (document.getElementById("hw-font")) return;
   const l = document.createElement("link");
   l.id = "hw-font"; l.rel = "stylesheet";
-  l.href = "https://fonts.googleapis.com/css2?family=Jua&family=Fredoka:wght@400;500;600;700&display=swap";
+  l.href = "https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&family=Nunito:wght@400;700;800;900&display=swap";
   document.head.appendChild(l);
   const s = document.createElement("style");
   s.id = "hw-style";
   s.textContent = `
     *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
-    body { background:#FFF9F0; font-family:'Jua','Fredoka',sans-serif; }
+    body { background:#FFF9F0; font-family:'Noto Sans KR','Nunito',sans-serif; }
     @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
     @keyframes pop    { 0%{transform:scale(.65)} 65%{transform:scale(1.22)} 100%{transform:scale(1)} }
     @keyframes fall   { 0%{opacity:1;transform:translateY(-10px) rotate(0)} 100%{opacity:0;transform:translateY(110vh) rotate(720deg)} }
@@ -46,14 +48,14 @@
     .ring.on { color:#fff; animation:pop .28s ease; }
     .ring.lg { width:96px; height:96px; font-size:36px; }
     .bb { border:none; border-radius:16px; cursor:pointer;
-          font-family:'Jua','Fredoka',sans-serif; font-weight:900;
+          font-family:'Noto Sans KR','Nunito',sans-serif; font-weight:900;
           transition:transform .12s, box-shadow .12s; }
     .bb:hover  { transform:translateY(-2px); }
     .bb:active { transform:translateY(1px); }
     .card { animation:fadeUp .35s ease both; }
     .chk-btn {
       border:none; border-radius:14px; cursor:pointer;
-      font-family:'Jua','Fredoka',sans-serif; font-weight:900;
+      font-family:'Noto Sans KR','Nunito',sans-serif; font-weight:900;
       font-size:18px; padding:14px 0; flex:1;
       transition:all .15s; user-select:none;
       display:flex; align-items:center; justify-content:center; gap:7px;
@@ -199,7 +201,7 @@ function Onboarding({ onDone }) {
           placeholder="이름을 입력해요" autoFocus
           style={{width:"100%",padding:"18px 20px",fontSize:26,fontWeight:800,
             border:"3px solid #e0e0e0",borderRadius:16,outline:"none",
-            fontFamily:"'Jua','Fredoka',sans-serif",textAlign:"center",marginBottom:22,color:C.dark}}/>
+            fontFamily:"'Noto Sans KR','Nunito',sans-serif",textAlign:"center",marginBottom:22,color:C.dark}}/>
         <button className="bb" onClick={()=>val.trim()&&onDone(val.trim())}
           style={{width:"100%",padding:"20px",
             background:"linear-gradient(135deg,#667eea,#764ba2)",
@@ -228,7 +230,7 @@ function HomeScreen({ name, onStart }) {
     <div style={{minHeight:"100vh",display:"flex",flexDirection:"column",
       alignItems:"center",justifyContent:"center",
       background:"linear-gradient(160deg,#667eea 0%,#a855f7 50%,#ec4899 100%)",
-      padding:"32px 24px",fontFamily:"'Jua','Fredoka',sans-serif",
+      padding:"32px 24px",fontFamily:"'Noto Sans KR','Nunito',sans-serif",
       position:"relative",overflow:"hidden"}}>
 
       {/* decorative blobs */}
@@ -875,7 +877,7 @@ function Settings({ links, setLinks, onClose, name, onChangeName }) {
         rows={2}
         style={{width:"100%",padding:"10px 12px",fontSize:13,fontWeight:700,
           border:`2.5px solid ${color}55`,borderRadius:12,outline:"none",
-          fontFamily:"'Jua','Fredoka',sans-serif",color:C.dark,resize:"none",lineHeight:1.5}}/>
+          fontFamily:"'Noto Sans KR','Nunito',sans-serif",color:C.dark,resize:"none",lineHeight:1.5}}/>
     </div>
   );
   return (
@@ -905,7 +907,7 @@ function Settings({ links, setLinks, onClose, name, onChangeName }) {
               onKeyDown={e=>e.key==="Enter"&&saveName()}
               style={{flex:1,padding:"12px 14px",fontSize:16,fontWeight:800,
                 border:"2.5px solid #e0e0e0",borderRadius:12,outline:"none",
-                fontFamily:"'Jua','Fredoka',sans-serif",color:C.dark}}/>
+                fontFamily:"'Noto Sans KR','Nunito',sans-serif",color:C.dark}}/>
             <button className="bb" onClick={saveName}
               style={{padding:"12px 18px",background:C.purple,color:"white",fontSize:14}}>
               저장
@@ -938,7 +940,7 @@ function Settings({ links, setLinks, onClose, name, onChangeName }) {
 /* ════════════════════════════════
    MAIN APP
 ════════════════════════════════ */
-export default function App() {
+function App() {
   const [name,      setName]      = useState(()=>ls.get("hw_name",""));
   const [onboard,   setOnboard]   = useState(()=>!ls.get("hw_name",""));
   const [checks,    setChecks]    = useState(()=>ls.get(`hw_checks_${TODAY}`,{}));
@@ -994,7 +996,7 @@ export default function App() {
   if(showHome) return <HomeScreen name={name} onStart={()=>setShowHome(false)}/>;
 
   return (
-    <div style={{minHeight:"100vh",background:"#FFF9F0",fontFamily:"'Jua','Fredoka',sans-serif",
+    <div style={{minHeight:"100vh",background:"#FFF9F0",fontFamily:"'Noto Sans KR','Nunito',sans-serif",
       paddingRight:92}}>
       <Header
         name={name}
@@ -1022,7 +1024,6 @@ export default function App() {
   );
 }
 
-const { useState, useEffect, useCallback, useMemo } = React;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(React.createElement(App));
