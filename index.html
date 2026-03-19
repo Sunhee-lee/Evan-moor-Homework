@@ -39,14 +39,14 @@ const { useState, useEffect, useCallback, useMemo } = React;
     @keyframes slideIn{ from{opacity:0;transform:translateX(60px)} to{opacity:1;transform:translateX(0)} }
     @keyframes scaleIn{ from{opacity:0;transform:scale(.7)} to{opacity:1;transform:scale(1)} }
     .ring {
-      width:72px; height:72px; border-radius:50%;
-      border:4px solid #d0d0d0; background:#fafafa;
+      width:52px; height:52px; border-radius:50%;
+      border:3px solid #d0d0d0; background:#fafafa;
       display:flex; align-items:center; justify-content:center;
-      font-size:26px; font-weight:900; cursor:pointer;
+      font-size:18px; font-weight:900; cursor:pointer;
       transition:all .15s; user-select:none; color:#c0c0c0; flex-shrink:0;
     }
     .ring.on { color:#fff; animation:pop .28s ease; }
-    .ring.lg { width:96px; height:96px; font-size:36px; }
+    .ring.lg { width:72px; height:72px; font-size:26px; }
     .bb { border:none; border-radius:16px; cursor:pointer;
           font-family:'Noto Sans KR','Nunito',sans-serif; font-weight:900;
           transition:transform .12s, box-shadow .12s; }
@@ -186,13 +186,59 @@ function DonePopup({ name, onClose }) {
    ONBOARDING
 ════════════════════════════════ */
 /* ════════════════════════════════
+   NAME POPUP  (첫 방문시)
+════════════════════════════════ */
+function NamePopup({ onDone }) {
+  const [val, setVal] = useState("");
+  const submit = () => { if (val.trim()) onDone(val.trim()); };
+  return (
+    <div style={{position:"fixed",inset:0,zIndex:5000,display:"flex",
+      alignItems:"center",justifyContent:"center",
+      background:"rgba(80,0,120,.45)",backdropFilter:"blur(8px)"}}>
+      <div style={{background:"white",borderRadius:32,padding:"44px 36px",
+        maxWidth:360,width:"90%",textAlign:"center",
+        animation:"pop .45s cubic-bezier(.34,1.56,.64,1)",
+        boxShadow:"0 24px 72px rgba(0,0,0,.25)"}}>
+        <div style={{fontSize:64,marginBottom:12}}>👋</div>
+        <h2 style={{fontSize:26,fontWeight:900,color:C.dark,marginBottom:8}}>
+          What's your name?
+        </h2>
+        <p style={{fontSize:15,color:"#aaa",marginBottom:24}}>
+          한 번만 입력하면 기억할게요!
+        </p>
+        <input
+          value={val}
+          onChange={e=>setVal(e.target.value)}
+          onKeyDown={e=>e.key==="Enter"&&submit()}
+          placeholder="이름을 입력해요"
+          autoFocus
+          style={{width:"100%",padding:"16px 18px",fontSize:22,fontWeight:800,
+            border:"3px solid #e0e0e0",borderRadius:16,outline:"none",
+            fontFamily:"'Noto Sans KR','Nunito',sans-serif",
+            textAlign:"center",marginBottom:18,color:C.dark,
+            transition:"border-color .2s"}}
+          onFocus={e=>e.target.style.borderColor=C.purple}
+          onBlur={e=>e.target.style.borderColor="#e0e0e0"}
+        />
+        <button className="bb" onClick={submit}
+          style={{width:"100%",padding:"18px",
+            background:`linear-gradient(135deg,${C.purple},#764ba2)`,
+            color:"white",fontSize:20,
+            boxShadow:`0 8px 24px ${C.purple}55`,
+            opacity: val.trim() ? 1 : 0.5}}>
+          확인 ✔
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/* ════════════════════════════════
    HOME SCREEN
 ════════════════════════════════ */
 function HomeScreen({ name, onStart }) {
   const d = new Date();
-  const dayNames = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-  const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-  const dateStr = `${dayNames[d.getDay()]}, ${monthNames[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
+  const dateStr = `${d.getFullYear()}년 ${d.getMonth()+1}월 ${d.getDate()}일 (${["일","월","화","수","목","금","토"][d.getDay()]})`;
   const isWeekday = [1,3,5].includes(d.getDay());
   const modeLabel = isWeekday ? "📝 월·수·금 모드" : "🎧 화·목 모드";
   const modeColor = isWeekday ? C.purple : "#c8a800";
@@ -420,24 +466,16 @@ function PlantSVG({ pct }) {
 ════════════════════════════════ */
 function FloatingProgress({ done, total, pct }) {
   const color = pct===100 ? "#2ED573" : pct>=60 ? "#FF9F43" : pct>=30 ? "#A29BFE" : "#74B9FF";
-  const labels = ["씨앗","새싹","자람","봉오리","피는중","거의다","만개!"];
-  const stage = pct===0?0:pct<=20?1:pct<=45?2:pct<=65?3:pct<=85?4:pct<100?5:6;
   return (
-    <div style={{position:"fixed",right:10,top:"50%",transform:"translateY(-50%)",
-      zIndex:500,animation:"slideIn .4s ease"}}>
-      <div style={{background:"white",borderRadius:20,padding:"10px 8px 12px",
-        boxShadow:"0 6px 28px rgba(0,0,0,.18)",
-        display:"flex",flexDirection:"column",alignItems:"center",gap:2,
-        border:`2.5px solid ${color}55`,minWidth:74}}>
+    <div style={{position:"fixed",top:100,right:0,zIndex:600}}>
+      <div style={{background:"white",borderRadius:"16px 0 0 16px",
+        padding:"8px 10px 10px",
+        boxShadow:"-4px 4px 18px rgba(0,0,0,.14)",
+        display:"flex",flexDirection:"column",alignItems:"center",gap:4,
+        border:`2px solid ${color}55`,borderRight:"none"}}>
+        <div style={{fontSize:10,fontWeight:900,color:"#aaa",letterSpacing:"-.3px",marginTop:2}}>숙제진행률</div>
         <PlantSVG pct={pct}/>
-        <div style={{fontSize:13,fontWeight:900,color,marginTop:2}}>{pct}%</div>
-        <div style={{fontSize:10,fontWeight:700,color:"#bbb",lineHeight:1.3,textAlign:"center"}}>
-          {done}/{total}
-        </div>
-        <div style={{fontSize:11,fontWeight:800,color,
-          background:`${color}18`,borderRadius:8,padding:"2px 8px",marginTop:2}}>
-          {labels[stage]}
-        </div>
+        <div style={{fontSize:12,fontWeight:900,color}}>{pct}%</div>
       </div>
     </div>
   );
@@ -453,7 +491,7 @@ function AudioBtn({ url, color, label }) {
         fontSize:16,borderRadius:14,
         display:"flex",alignItems:"center",justifyContent:"center",gap:10,
         boxShadow:`0 4px 14px ${color}44`,marginTop:4}}>
-      <span style={{fontSize:20}}>🔊</span> {label} 듣기 열기 ↗
+      <span style={{fontSize:20}}>🔊</span> {label} 듣기
     </button>
   );
 }
@@ -913,6 +951,7 @@ function Settings({ links, setLinks, onClose, name, onChangeName }) {
 ════════════════════════════════ */
 function App() {
   const [name,      setName]      = useState(()=>ls.get("hw_name",""));
+  const [showNamePopup, setShowNamePopup] = useState(()=>!ls.get("hw_name",""));
   const [checks,    setChecks]    = useState(()=>ls.get(`hw_checks_${TODAY}`,{}));
   const [dayMode,   setDayMode]   = useState("comprehensive");
   const [links,     setLinks]     = useState(()=>ls.get("hw_links",DEFAULT_LINKS));
@@ -966,7 +1005,7 @@ function App() {
 
   return (
     <div style={{minHeight:"100vh",background:"#FFF9F0",fontFamily:"'Noto Sans KR','Nunito',sans-serif",
-      paddingRight:92}}>
+      }}>
       <Header
         name={name}
         onGoHome={()=>setShowHome(true)}
