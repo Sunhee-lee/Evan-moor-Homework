@@ -105,7 +105,7 @@ function getItems(mode) {
     {ck:"wonders_listen_0",type:"bool"},{ck:"wonders_listen_1",type:"bool"},{ck:"wonders_listen_2",type:"bool"},
     {ck:"wonders_hwb",type:"opt"},
     {ck:"bricks_listen_0",type:"bool"},{ck:"bricks_listen_1",type:"bool"},{ck:"bricks_listen_2",type:"bool"},
-    {ck:"bricks_hwb",type:"bool"},
+    {ck:"bricks_hwb",type:"opt"},
     {ck:"bricks_wb",type:"opt"},
     {ck:"comeon_listen_0",type:"bool"},{ck:"comeon_listen_1",type:"bool"},{ck:"comeon_listen_2",type:"bool"},
     {ck:"comeon_wb",type:"opt"},
@@ -696,7 +696,7 @@ function ComprehensiveBoard({ checks, toggle, links }) {
         </div>
         <Div color={C.bricks}/>
         <SubSec num="4-1" label="Homework Book" color={C.bricks}/>
-        <ChkRow label="Bricks Reading Homework Book을 하세요"
+        <OptRow label="Bricks Reading Homework Book을 하세요"
           ck="bricks_hwb" checks={checks} toggle={toggle} color={C.bricks} icon="📓"/>
         <SubSec num="4-2" label="Workbook" color={C.bricks}/>
         <OptRow label="Bricks Reading Workbook을 하세요"
