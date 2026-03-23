@@ -676,12 +676,13 @@ function ComprehensiveBoard({ checks, toggle, links }) {
           🎧 3번 듣고 따라하세요
         </p>
         <Rings prefix="wonders_listen" checks={checks} toggle={toggle} color={C.wonders}/>
+        <div style={{marginTop:16}}>
+          <AudioBtn url={links.wonders} color={C.wonders} label="Wonders"/>
+        </div>
         <Div color={C.wonders}/>
         <SubSec num="3-1" label="Home Workbook" color={C.wonders}/>
         <OptRow label="Wonders Homework Workbook 해당 page를 하세요"
           ck="wonders_hwb" checks={checks} toggle={toggle} color={C.wonders} icon="📓"/>
-        <Div color={C.wonders}/>
-        <AudioBtn url={links.wonders} color={C.wonders} label="Wonders"/>
       </Card>
 
       <Card color={C.bricks} idx={2}>
@@ -690,6 +691,9 @@ function ComprehensiveBoard({ checks, toggle, links }) {
           🎧 3번 듣고 따라하세요
         </p>
         <Rings prefix="bricks_listen" checks={checks} toggle={toggle} color={C.bricks}/>
+        <div style={{marginTop:16}}>
+          <AudioBtn url={links.bricks} color={C.bricks} label="Bricks Reading"/>
+        </div>
         <Div color={C.bricks}/>
         <SubSec num="4-1" label="Homework Book" color={C.bricks}/>
         <ChkRow label="Bricks Reading Homework Book을 하세요"
@@ -697,8 +701,6 @@ function ComprehensiveBoard({ checks, toggle, links }) {
         <SubSec num="4-2" label="Workbook" color={C.bricks}/>
         <OptRow label="Bricks Reading Workbook을 하세요"
           ck="bricks_wb" checks={checks} toggle={toggle} color={C.bricks} icon="📖"/>
-        <Div color={C.bricks}/>
-        <AudioBtn url={links.bricks} color={C.bricks} label="Bricks Reading"/>
       </Card>
 
       <Card color={C.comeon} idx={3}>
@@ -707,12 +709,13 @@ function ComprehensiveBoard({ checks, toggle, links }) {
           🎧 3번 듣고 따라하세요
         </p>
         <Rings prefix="comeon_listen" checks={checks} toggle={toggle} color={C.comeon}/>
+        <div style={{marginTop:16}}>
+          <AudioBtn url={links.comeon} color={C.comeon} label="Come On Phonics"/>
+        </div>
         <Div color={C.comeon}/>
         <SubSec num="5-1" label="Workbook" color={C.comeon}/>
         <OptRow label="Come On Phonics Workbook 해당 page를 하세요"
           ck="comeon_wb" checks={checks} toggle={toggle} color={C.comeon} icon="📖"/>
-        <Div color={C.comeon}/>
-        <AudioBtn url={links.comeon} color={C.comeon} label="Come On Phonics"/>
       </Card>
 
       <Card color={C.gray} idx={4}>
