@@ -77,6 +77,16 @@ const { useState, useEffect, useCallback, useMemo } = React;
     /* arc progress */
     .arc-track { fill:none; stroke:#e8e8e8; }
     .arc-fill  { fill:none; stroke-linecap:round; transition:stroke-dashoffset .5s ease; }
+    /* 태블릿/패드 환경 글씨 확대 */
+    @media (min-width:600px) {
+      html { font-size:120%; }
+      .ring { width:64px; height:64px; font-size:22px; }
+      .ring.lg { width:88px; height:88px; font-size:32px; }
+      .chk-btn { font-size:22px; padding:18px 0; }
+    }
+    @media (min-width:900px) {
+      html { font-size:135%; }
+    }
   `;
   document.head.appendChild(s);
 })();
@@ -739,11 +749,14 @@ const THEMES = {
 /* ════════════════════════════════
    FLOATING PROGRESS  (오른쪽 고정)
 ════════════════════════════════ */
-function FloatingProgress({ done, total, pct, theme }) {
+function FloatingProgress({ done, total, pct, theme, onReset }) {
   const color = pct===100 ? "#2ED573" : pct>=60 ? "#FF9F43" : pct>=30 ? "#5EAAB5" : "#8ED0E0";
   const ThemeSVG = (THEMES[theme] || THEMES.flower).Component;
+  const handleClick = () => {
+    if(confirm("진행 내용을 초기화할까요?")) onReset();
+  };
   return (
-    <div style={{position:"fixed",top:100,right:0,zIndex:600}}>
+    <div style={{position:"fixed",top:100,right:0,zIndex:600,cursor:"pointer"}} onClick={handleClick}>
       <div style={{background:"white",borderRadius:"16px 0 0 16px",
         padding:"8px 10px 10px",
         boxShadow:"-4px 4px 18px rgba(0,0,0,.14)",
@@ -1258,17 +1271,15 @@ function Settings({ links, setLinks, onClose, name, onChangeName, theme, setThem
             paddingBottom:8,borderBottom:"2px solid #F0F0F0"}}>
             ✏️ 이름 변경
           </div>
-          <div style={{display:"flex",gap:10}}>
-            <input value={nameVal} onChange={e=>setNameVal(e.target.value)}
-              onKeyDown={e=>e.key==="Enter"&&saveName()}
-              style={{flex:1,padding:"12px 14px",fontSize:16,fontWeight:800,
-                border:"2.5px solid #e0e0e0",borderRadius:12,outline:"none",
-                fontFamily:"'Noto Sans KR','Nunito',sans-serif",color:C.dark}}/>
-          </div>
-          <button className="bb" onClick={saveName}
-            style={{width:"100%",marginTop:10,padding:"15px",
+          <input value={nameVal} onChange={e=>setNameVal(e.target.value)}
+            onKeyDown={e=>e.key==="Enter"&&saveName()}
+            style={{width:"100%",padding:"10px 12px",fontSize:13,fontWeight:800,
+              border:"2.5px solid #e0e0e0",borderRadius:12,outline:"none",
+              fontFamily:"'Noto Sans KR','Nunito',sans-serif",color:C.dark}}/>
+          <button className="bb" onClick={()=>{ saveName(); onClose(); }}
+            style={{width:"100%",marginTop:10,padding:"14px",
               background:"linear-gradient(135deg,#8ED0E0,#5EAAB5)",
-              color:"white",fontSize:16,
+              color:"white",fontSize:15,
               boxShadow:"0 4px 12px rgba(94,170,181,.2)"}}>
             이름 저장하기 ✔
           </button>
@@ -1353,7 +1364,7 @@ function App() {
         : <ComprehensiveBoard checks={checks} toggle={toggle} links={links}/>
       }
 
-      <FloatingProgress {...progress} theme={theme}/>
+      <FloatingProgress {...progress} theme={theme} onReset={()=>{ setChecks({}); ls.set(`hw_checks_${TODAY}`,{}); }}/>
 
       {showDone && (
         <DonePopup name={name} theme={theme} onClose={()=>setShowDone(false)}/>
