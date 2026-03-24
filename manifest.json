@@ -1,6 +1,6 @@
 {
   "name": "EVAN Homework",
-  "short_name": "EVAN HW",
+  "short_name": "EVAN Homework",
   "description": "에반무어 숙제 체크리스트",
   "start_url": "./index.html",
   "scope": "./",
