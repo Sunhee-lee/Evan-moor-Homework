@@ -17,6 +17,7 @@
   <link rel="apple-touch-icon" sizes="128x128" href="icons/icon-128x128.png"/>
   <link rel="manifest" href="manifest.json"/>
   <title>EVAN Homework</title>
+  <script>if("serviceWorker" in navigator) navigator.serviceWorker.register("./sw.js");</script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
@@ -339,7 +340,7 @@ function Header({ name, onShowHistory, onShowSettings, onGoHome }) {
         <h1 style={{flex:1,minWidth:0,fontSize:14,fontWeight:900,color:"white",
           textShadow:"0 1px 4px rgba(0,0,0,.12)",
           whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis",margin:0}}>
-          {name}'s EVAN-MOOR HOMEWORK
+          {name}'s EVAN HOMEWORK
         </h1>
         <div style={{display:"flex",gap:4,flexShrink:0}}>
           <button className="bb" onClick={onGoHome}
