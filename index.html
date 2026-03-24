@@ -3,6 +3,19 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta name="theme-color" content="#8ED0E0"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="apple-mobile-web-app-title" content="EVAN HWK"/>
+  <meta name="description" content="에반무어 숙제 체크리스트"/>
+  <link rel="icon" type="image/x-icon" href="favicon.ico"/>
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32x32.png"/>
+  <link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16x16.png"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180x180.png"/>
+  <link rel="apple-touch-icon" sizes="152x152" href="icons/icon-152x152.png"/>
+  <link rel="apple-touch-icon" sizes="144x144" href="icons/icon-144x144.png"/>
+  <link rel="apple-touch-icon" sizes="128x128" href="icons/icon-128x128.png"/>
+  <link rel="manifest" href="manifest.json"/>
   <title>EVAN-MOOR Homework</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
@@ -35,7 +48,7 @@ const { useState, useEffect, useCallback, useMemo } = React;
     @keyframes pop    { 0%{transform:scale(.65)} 65%{transform:scale(1.22)} 100%{transform:scale(1)} }
     @keyframes fall   { 0%{opacity:1;transform:translateY(-10px) rotate(0)} 100%{opacity:0;transform:translateY(110vh) rotate(720deg)} }
     @keyframes sway   { 0%,100%{transform:rotate(-9deg)} 50%{transform:rotate(9deg)} }
-    @keyframes pulse  { 0%,100%{box-shadow:0 0 0 0 rgba(102,126,234,.5)} 60%{box-shadow:0 0 0 16px rgba(102,126,234,0)} }
+    @keyframes pulse  { 0%,100%{box-shadow:0 0 0 0 rgba(94,170,181,.5)} 60%{box-shadow:0 0 0 16px rgba(94,170,181,0)} }
     @keyframes slideIn{ from{opacity:0;transform:translateX(60px)} to{opacity:1;transform:translateX(0)} }
     @keyframes scaleIn{ from{opacity:0;transform:scale(.7)} to{opacity:1;transform:scale(1)} }
     .ring {
@@ -222,7 +235,7 @@ function NamePopup({ onDone }) {
         />
         <button className="bb" onClick={submit}
           style={{width:"100%",padding:"18px",
-            background:`linear-gradient(135deg,${C.purple},#764ba2)`,
+            background:`linear-gradient(135deg,#8ED0E0,#5EAAB5)`,
             color:"white",fontSize:20,
             boxShadow:`0 8px 24px ${C.purple}55`,
             opacity: val.trim() ? 1 : 0.5}}>
@@ -243,7 +256,7 @@ function HomeScreen({ name, onStart }) {
   return (
     <div style={{minHeight:"100vh",display:"flex",flexDirection:"column",
       alignItems:"center",justifyContent:"center",
-      background:"linear-gradient(160deg,#667eea 0%,#a855f7 50%,#ec4899 100%)",
+      background:"linear-gradient(160deg,#8ED0E0 0%,#5EAAB5 50%,#8DD8CC 100%)",
       padding:"32px 24px",fontFamily:"'Noto Sans KR','Nunito',sans-serif",
       position:"relative",overflow:"hidden"}}>
 
@@ -303,7 +316,7 @@ function HomeScreen({ name, onStart }) {
 ════════════════════════════════ */
 function Header({ name, onShowHistory, onShowSettings, onGoHome }) {
   return (
-    <div style={{background:"linear-gradient(135deg,#667eea,#764ba2)",
+    <div style={{background:"linear-gradient(135deg,#8ED0E0,#5EAAB5)",
       padding:"14px 18px 14px"}}>
       <div style={{fontSize:13,fontWeight:700,color:"rgba(255,255,255,.75)",
         marginBottom:8,letterSpacing:".3px"}}>
@@ -1218,9 +1231,9 @@ function Settings({ links, setLinks, onClose, name, onChangeName, theme, setThem
               </div>
               <button className="bb" onClick={()=>{ setTheme(selTheme); onClose(); }}
                 style={{width:"100%",padding:"14px",
-                  background:"linear-gradient(135deg,#667eea,#764ba2)",
+                  background:"linear-gradient(135deg,#8ED0E0,#5EAAB5)",
                   color:"white",fontSize:15,
-                  boxShadow:"0 6px 20px rgba(102,126,234,.45)"}}>
+                  boxShadow:"0 6px 20px rgba(94,170,181,.45)"}}>
                 테마 적용하기 ✔
               </button>
             </div>
@@ -1238,9 +1251,9 @@ function Settings({ links, setLinks, onClose, name, onChangeName, theme, setThem
           {row("bricks","📗 Bricks Reading",C.bricks)}
           <button className="bb" onClick={saveLinks}
             style={{width:"100%",padding:"15px",
-              background:"linear-gradient(135deg,#667eea,#764ba2)",
+              background:"linear-gradient(135deg,#8ED0E0,#5EAAB5)",
               color:"white",fontSize:16,
-              boxShadow:"0 6px 20px rgba(102,126,234,.45)"}}>
+              boxShadow:"0 6px 20px rgba(94,170,181,.45)"}}>
             링크 저장하기 ✔
           </button>
         </div>
