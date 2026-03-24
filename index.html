@@ -915,9 +915,13 @@ function ListeningBoard({ checks, toggle, links }) {
   return (
     <div style={{padding:"8px 18px 80px"}}>
       {subs.map((s,i)=>{
-        const bgs={wonders:"#FFF8F8",bricks:"#F6FDF9",comeon:"#F5FAFD"};
+        const bgs={
+          wonders:"linear-gradient(to bottom, #FFFFFF, #FFF8F8, #FFF0F0, #FFE8E8)",
+          bricks:"linear-gradient(to bottom, #FFFFFF, #F6FDF9, #EDFAF3, #E0F8EE)",
+          comeon:"linear-gradient(to bottom, #FFFFFF, #F5FAFD, #EDF5FB, #E0F0FF)"
+        };
         return (
-        <div key={s.key} className="card" style={{background:`linear-gradient(135deg, #FFFFFF, #FFFFFF, ${bgs[s.key]||"#FAFAFA"})`,borderRadius:24,
+        <div key={s.key} className="card" style={{background:bgs[s.key]||"white",borderRadius:24,
           border:`4px solid ${s.color}`,padding:"24px 20px",marginBottom:14,
           boxShadow:`0 6px 22px ${s.color}1a`,animationDelay:`${i*.08}s`}}>
           <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:20}}>
@@ -943,7 +947,7 @@ function ListeningBoard({ checks, toggle, links }) {
 function ComprehensiveBoard({ checks, toggle, links }) {
   return (
     <div style={{padding:"8px 18px 80px"}}>
-      <Card color="#E8B730" idx={0} bg="linear-gradient(135deg, #FFFFFF, #FFFEF8, #FFFDE7, #FFF8E1)">
+      <Card color="#E8B730" idx={0} bg="linear-gradient(to bottom, #FFFFFF, #FFFEF8, #FFFDE7, #FFF8E1)">
         <Sec num="1" emoji="📝" title="Vocabulary" color="#E8B730"/>
         <SubSec num="1-1" label="영어노트" color="#E8B730"/>
         <ChkRow label="영어노트에 단어와 뜻을 쓰세요"
@@ -956,7 +960,7 @@ function ComprehensiveBoard({ checks, toggle, links }) {
           ck="wrong_words" checks={checks} toggle={toggle} color="#E8B730" icon="✏️"/>
       </Card>
 
-      <Card color="#E88A8A" idx={1} bg="linear-gradient(135deg, #FFFFFF, #FFF8F8, #FFF0F0, #FFE8E8)">
+      <Card color="#E88A8A" idx={1} bg="linear-gradient(to bottom, #FFFFFF, #FFF8F8, #FFF0F0, #FFE8E8)">
         <Sec num="2" emoji="📕" title="Wonders" color="#E88A8A"/>
         <p style={{textAlign:"center",fontWeight:700,color:"#999",fontSize:13,marginBottom:12}}>
           🎧 3번 듣고 따라하세요
@@ -971,7 +975,7 @@ function ComprehensiveBoard({ checks, toggle, links }) {
           ck="wonders_hwb" checks={checks} toggle={toggle} color="#E88A8A" icon="📃"/>
       </Card>
 
-      <Card color="#6BC5A0" idx={2} bg="linear-gradient(135deg, #FFFFFF, #F6FDF9, #EDFAF3, #E0F8EE)">
+      <Card color="#6BC5A0" idx={2} bg="linear-gradient(to bottom, #FFFFFF, #F6FDF9, #EDFAF3, #E0F8EE)">
         <Sec num="3" emoji="📗" title="Bricks Reading" color="#6BC5A0"/>
         <p style={{textAlign:"center",fontWeight:700,color:"#999",fontSize:13,marginBottom:12}}>
           🎧 3번 듣고 따라하세요
@@ -989,7 +993,7 @@ function ComprehensiveBoard({ checks, toggle, links }) {
           ck="bricks_wb" checks={checks} toggle={toggle} color="#6BC5A0" icon="📗"/>
       </Card>
 
-      <Card color="#7BAFD4" idx={3} bg="linear-gradient(135deg, #FFFFFF, #F5FAFD, #EDF5FB, #E0F0FF)">
+      <Card color="#7BAFD4" idx={3} bg="linear-gradient(to bottom, #FFFFFF, #F5FAFD, #EDF5FB, #E0F0FF)">
         <Sec num="4" emoji="📘" title="Come On Phonics" color="#7BAFD4"/>
         <p style={{textAlign:"center",fontWeight:700,color:"#999",fontSize:13,marginBottom:12}}>
           🎧 3번 듣고 따라하세요
@@ -1004,7 +1008,7 @@ function ComprehensiveBoard({ checks, toggle, links }) {
           ck="comeon_wb" checks={checks} toggle={toggle} color="#7BAFD4" icon="📘"/>
       </Card>
 
-      <Card color="#A0A0A0" idx={4} bg="linear-gradient(135deg, #FFFFFF, #FAFAFA, #F5F5F5, #F0F0F0)">
+      <Card color="#A0A0A0" idx={4} bg="linear-gradient(to bottom, #FFFFFF, #FAFAFA, #F5F5F5, #F0F0F0)">
         <Sec num="5" emoji="📄" title="John Teacher 숙제" color="#A0A0A0"/>
         <OptRow label="선생님 paper 숙제를 하세요"
           ck="john_paper" checks={checks} toggle={toggle} color="#A0A0A0" icon="✏️"/>
