@@ -22,7 +22,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; background: #FFF9F0; }
+    html, body { height: 100%; background: linear-gradient(180deg, #E8F8F5 0%, #F0FFFE 40%, #E0F7F2 100%); min-height: 100vh; }
     #root { min-height: 100%; }
   </style>
 </head>
@@ -43,7 +43,7 @@ const { useState, useEffect, useCallback, useMemo } = React;
   s.id = "hw-style";
   s.textContent = `
     *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
-    body { background:#FFF9F0; font-family:'Noto Sans KR','Nunito',sans-serif; }
+    body { background:linear-gradient(180deg, #E8F8F5 0%, #F0FFFE 40%, #E0F7F2 100%); font-family:'Noto Sans KR','Nunito',sans-serif; }
     @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
     @keyframes pop    { 0%{transform:scale(.65)} 65%{transform:scale(1.22)} 100%{transform:scale(1)} }
     @keyframes fall   { 0%{opacity:1;transform:translateY(-10px) rotate(0)} 100%{opacity:0;transform:translateY(110vh) rotate(720deg)} }
@@ -962,7 +962,7 @@ function ComprehensiveBoard({ checks, toggle, links }) {
         <Div color={C.wonders}/>
         <SubSec num="3-1" label="Home Workbook" color={C.wonders}/>
         <OptRow label="Wonders Homework Workbook 해당 page를 하세요"
-          ck="wonders_hwb" checks={checks} toggle={toggle} color={C.wonders} icon="📓"/>
+          ck="wonders_hwb" checks={checks} toggle={toggle} color={C.wonders} icon="📃"/>
       </Card>
 
       <Card color={C.bricks} idx={2}>
@@ -977,10 +977,10 @@ function ComprehensiveBoard({ checks, toggle, links }) {
         <Div color={C.bricks}/>
         <SubSec num="4-1" label="Homework Book" color={C.bricks}/>
         <OptRow label="Bricks Reading Homework Book을 하세요"
-          ck="bricks_hwb" checks={checks} toggle={toggle} color={C.bricks} icon="📓"/>
+          ck="bricks_hwb" checks={checks} toggle={toggle} color={C.bricks} icon="📃"/>
         <SubSec num="4-2" label="Workbook" color={C.bricks}/>
         <OptRow label="Bricks Reading Workbook을 하세요"
-          ck="bricks_wb" checks={checks} toggle={toggle} color={C.bricks} icon="📖"/>
+          ck="bricks_wb" checks={checks} toggle={toggle} color={C.bricks} icon="📗"/>
       </Card>
 
       <Card color={C.comeon} idx={3}>
@@ -995,7 +995,7 @@ function ComprehensiveBoard({ checks, toggle, links }) {
         <Div color={C.comeon}/>
         <SubSec num="5-1" label="Workbook" color={C.comeon}/>
         <OptRow label="Come On Phonics Workbook 해당 page를 하세요"
-          ck="comeon_wb" checks={checks} toggle={toggle} color={C.comeon} icon="📖"/>
+          ck="comeon_wb" checks={checks} toggle={toggle} color={C.comeon} icon="📘"/>
       </Card>
 
       <Card color={C.gray} idx={4}>
@@ -1200,7 +1200,7 @@ function Settings({ links, setLinks, onClose, name, onChangeName, theme, setThem
                 border:"2.5px solid #e0e0e0",borderRadius:12,outline:"none",
                 fontFamily:"'Noto Sans KR','Nunito',sans-serif",color:C.dark}}/>
             <button className="bb" onClick={saveName}
-              style={{padding:"12px 18px",background:C.purple,color:"white",fontSize:14}}>
+              style={{padding:"12px 18px",background:"#5EAAB5",color:"white",fontSize:14}}>
               저장
             </button>
           </div>
@@ -1322,7 +1322,7 @@ function App() {
   if(showHome) return <HomeScreen name={name} onStart={()=>setShowHome(false)}/>;
 
   return (
-    <div style={{minHeight:"100vh",background:"#FFF9F0",fontFamily:"'Noto Sans KR','Nunito',sans-serif",
+    <div style={{minHeight:"100vh",background:"linear-gradient(180deg, #E8F8F5 0%, #F0FFFE 40%, #E0F7F2 100%)",fontFamily:"'Noto Sans KR','Nunito',sans-serif",
       }}>
       <Header
         name={name}
