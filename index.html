@@ -211,7 +211,7 @@ function NamePopup({ onDone }) {
   return (
     <div style={{position:"fixed",inset:0,zIndex:5000,display:"flex",
       alignItems:"center",justifyContent:"center",
-      background:"rgba(80,0,120,.45)",backdropFilter:"blur(8px)"}}>
+      background:"rgba(46,100,110,.45)",backdropFilter:"blur(8px)"}}>
       <div style={{background:"white",borderRadius:32,padding:"44px 36px",
         maxWidth:360,width:"90%",textAlign:"center",
         animation:"pop .45s cubic-bezier(.34,1.56,.64,1)",
@@ -234,14 +234,14 @@ function NamePopup({ onDone }) {
             fontFamily:"'Noto Sans KR','Nunito',sans-serif",
             textAlign:"center",marginBottom:18,color:C.dark,
             transition:"border-color .2s"}}
-          onFocus={e=>e.target.style.borderColor=C.purple}
+          onFocus={e=>e.target.style.borderColor="#5EAAB5"}
           onBlur={e=>e.target.style.borderColor="#e0e0e0"}
         />
         <button className="bb" onClick={submit}
           style={{width:"100%",padding:"18px",
             background:`linear-gradient(135deg,#8ED0E0,#5EAAB5)`,
             color:"white",fontSize:20,
-            boxShadow:`0 8px 24px ${C.purple}55`,
+            boxShadow:"0 8px 24px rgba(94,170,181,.45)",
             opacity: val.trim() ? 1 : 0.5}}>
           확인 ✔
         </button>
@@ -338,19 +338,19 @@ function Header({ name, onShowHistory, onShowSettings, onGoHome }) {
           style={{background:"rgba(255,255,255,.18)",color:"white",
             border:"2px solid rgba(255,255,255,.45)",fontSize:12,padding:"7px 13px",
             whiteSpace:"nowrap"}}>
-          🏠 홈
+          ◻ 홈
         </button>
         <button className="bb" onClick={onShowHistory}
           style={{background:"rgba(255,255,255,.18)",color:"white",
             border:"2px solid rgba(255,255,255,.45)",fontSize:12,padding:"7px 13px",
             whiteSpace:"nowrap"}}>
-          📊 기록
+          ☰ 기록
         </button>
         <button className="bb" onClick={onShowSettings}
           style={{background:"rgba(255,255,255,.18)",color:"white",
             border:"2px solid rgba(255,255,255,.45)",fontSize:12,padding:"7px 13px",
             whiteSpace:"nowrap"}}>
-          ⚙️ 설정
+          ○ 설정
         </button>
       </div>
     </div>
@@ -908,9 +908,9 @@ function Div({ color }) {
 ════════════════════════════════ */
 function ListeningBoard({ checks, toggle, links }) {
   const subs=[
-    {key:"wonders",color:C.wonders,emoji:"📕",label:"Wonders"},
-    {key:"bricks", color:C.bricks, emoji:"📗",label:"Bricks Reading"},
-    {key:"comeon", color:C.comeon, emoji:"📘",label:"Come On Phonics"},
+    {key:"wonders",color:"#E88A8A",emoji:"📕",label:"Wonders"},
+    {key:"bricks", color:"#6BC5A0", emoji:"📗",label:"Bricks Reading"},
+    {key:"comeon", color:"#7BAFD4", emoji:"📘",label:"Come On Phonics"},
   ];
   return (
     <div style={{padding:"8px 18px 80px"}}>
@@ -1197,25 +1197,6 @@ function Settings({ links, setLinks, onClose, name, onChangeName, theme, setThem
               style={{background:"#F0F0F0",color:C.gray,fontSize:13,padding:"8px 14px"}}>닫기</button>
         </div>
 
-        {/* 이름 변경 */}
-        <div style={{marginBottom:24}}>
-          <div style={{fontSize:15,fontWeight:900,color:C.dark,marginBottom:14,
-            paddingBottom:8,borderBottom:"2px solid #F0F0F0"}}>
-            ✏️ 이름 변경
-          </div>
-          <div style={{display:"flex",gap:10}}>
-            <input value={nameVal} onChange={e=>setNameVal(e.target.value)}
-              onKeyDown={e=>e.key==="Enter"&&saveName()}
-              style={{flex:1,padding:"12px 14px",fontSize:16,fontWeight:800,
-                border:"2.5px solid #e0e0e0",borderRadius:12,outline:"none",
-                fontFamily:"'Noto Sans KR','Nunito',sans-serif",color:C.dark}}/>
-            <button className="bb" onClick={saveName}
-              style={{padding:"12px 18px",background:"#5EAAB5",color:"white",fontSize:14}}>
-              저장
-            </button>
-          </div>
-        </div>
-
         {/* 테마 선택 */}
         {(() => {
           const [selTheme, setSelTheme] = useState(theme);
@@ -1229,13 +1210,13 @@ function Settings({ links, setLinks, onClose, name, onChangeName, theme, setThem
                 {Object.entries(THEMES).map(([key,{label,icon}])=>(
                   <button key={key} className="bb" onClick={()=>setSelTheme(key)}
                     style={{padding:"12px 4px",textAlign:"center",
-                      background:selTheme===key?`${C.purple}18`:"#F8F8F8",
-                      border:`2.5px solid ${selTheme===key?C.purple:"#e8e8e8"}`,
+                      background:selTheme===key?"#E8F8F518":"#F8F8F8",
+                      border:`2.5px solid ${selTheme===key?"#5EAAB5":"#e8e8e8"}`,
                       borderRadius:14,display:"flex",flexDirection:"column",
                       alignItems:"center",gap:4}}>
                     <span style={{fontSize:24}}>{icon}</span>
                     <span style={{fontSize:11,fontWeight:800,
-                      color:selTheme===key?C.purple:C.gray}}>{label}</span>
+                      color:selTheme===key?"#5EAAB5":C.gray}}>{label}</span>
                   </button>
                 ))}
               </div>
@@ -1265,6 +1246,28 @@ function Settings({ links, setLinks, onClose, name, onChangeName, theme, setThem
               color:"white",fontSize:16,
               boxShadow:"0 6px 20px rgba(94,170,181,.45)"}}>
             링크 저장하기 ✔
+          </button>
+        </div>
+
+        {/* 이름 변경 */}
+        <div style={{marginBottom:8}}>
+          <div style={{fontSize:15,fontWeight:900,color:C.dark,marginBottom:14,
+            paddingBottom:8,borderBottom:"2px solid #F0F0F0"}}>
+            ✏️ 이름 변경
+          </div>
+          <div style={{display:"flex",gap:10}}>
+            <input value={nameVal} onChange={e=>setNameVal(e.target.value)}
+              onKeyDown={e=>e.key==="Enter"&&saveName()}
+              style={{flex:1,padding:"12px 14px",fontSize:16,fontWeight:800,
+                border:"2.5px solid #e0e0e0",borderRadius:12,outline:"none",
+                fontFamily:"'Noto Sans KR','Nunito',sans-serif",color:C.dark}}/>
+          </div>
+          <button className="bb" onClick={saveName}
+            style={{width:"100%",marginTop:10,padding:"15px",
+              background:"linear-gradient(135deg,#8ED0E0,#5EAAB5)",
+              color:"white",fontSize:16,
+              boxShadow:"0 6px 20px rgba(94,170,181,.45)"}}>
+            이름 저장하기 ✔
           </button>
         </div>
       </div>
