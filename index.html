@@ -321,40 +321,39 @@ function HomeScreen({ name, onStart }) {
 function Header({ name, onShowHistory, onShowSettings, onGoHome }) {
   return (
     <div style={{background:"linear-gradient(135deg,#8ED0E0,#5EAAB5)",
-      padding:"12px 16px 10px"}}>
-      <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:6}}>
-        <div style={{fontSize:11,fontWeight:700,color:"rgba(255,255,255,.75)",letterSpacing:".3px"}}>
-          {todayLabel}
-        </div>
+      padding:"10px 14px 8px"}}>
+      <div style={{fontSize:10,fontWeight:700,color:"rgba(255,255,255,.7)",letterSpacing:".3px",marginBottom:4}}>
+        {todayLabel}
       </div>
-      <h1 style={{fontSize:15,fontWeight:900,color:"white",
-        textShadow:"0 1px 6px rgba(0,0,0,.15)",
-        whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis",
-        marginBottom:8}}>
-        {name}'s EVAN-MOOR HOMEWORK
-      </h1>
-      <div style={{display:"flex",gap:6}}>
-        <button className="bb" onClick={onGoHome}
-          style={{flex:1,background:"rgba(255,255,255,.18)",color:"white",
-            border:"1.5px solid rgba(255,255,255,.4)",fontSize:11,padding:"6px 0",
-            borderRadius:10,display:"flex",alignItems:"center",justifyContent:"center",gap:4}}>
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12L12 3l9 9"/><path d="M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9"/></svg>
-          홈
-        </button>
-        <button className="bb" onClick={onShowHistory}
-          style={{flex:1,background:"rgba(255,255,255,.18)",color:"white",
-            border:"1.5px solid rgba(255,255,255,.4)",fontSize:11,padding:"6px 0",
-            borderRadius:10,display:"flex",alignItems:"center",justifyContent:"center",gap:4}}>
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-          기록
-        </button>
-        <button className="bb" onClick={onShowSettings}
-          style={{flex:1,background:"rgba(255,255,255,.18)",color:"white",
-            border:"1.5px solid rgba(255,255,255,.4)",fontSize:11,padding:"6px 0",
-            borderRadius:10,display:"flex",alignItems:"center",justifyContent:"center",gap:4}}>
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09a1.65 1.65 0 00-1.08-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09a1.65 1.65 0 001.51-1.08 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001.08 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9c.26.604.852.997 1.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1.08z"/></svg>
-          설정
-        </button>
+      <div style={{display:"flex",alignItems:"center",gap:8}}>
+        <h1 style={{flex:1,minWidth:0,fontSize:14,fontWeight:900,color:"white",
+          textShadow:"0 1px 4px rgba(0,0,0,.12)",
+          whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis",margin:0}}>
+          {name}'s EVAN-MOOR HOMEWORK
+        </h1>
+        <div style={{display:"flex",gap:4,flexShrink:0}}>
+          <button className="bb" onClick={onGoHome}
+            style={{background:"rgba(255,255,255,.18)",color:"white",
+              border:"1.5px solid rgba(255,255,255,.35)",fontSize:10,padding:"4px 8px",
+              borderRadius:8,display:"flex",alignItems:"center",gap:3}}>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12L12 3l9 9"/><path d="M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9"/></svg>
+            홈
+          </button>
+          <button className="bb" onClick={onShowHistory}
+            style={{background:"rgba(255,255,255,.18)",color:"white",
+              border:"1.5px solid rgba(255,255,255,.35)",fontSize:10,padding:"4px 8px",
+              borderRadius:8,display:"flex",alignItems:"center",gap:3}}>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+            기록
+          </button>
+          <button className="bb" onClick={onShowSettings}
+            style={{background:"rgba(255,255,255,.18)",color:"white",
+              border:"1.5px solid rgba(255,255,255,.35)",fontSize:10,padding:"4px 8px",
+              borderRadius:8,display:"flex",alignItems:"center",gap:3}}>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09a1.65 1.65 0 00-1.08-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09a1.65 1.65 0 001.51-1.08 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001.08 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9c.26.604.852.997 1.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1.08z"/></svg>
+            설정
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -764,11 +763,11 @@ function FloatingProgress({ done, total, pct, theme }) {
 function AudioBtn({ url, color, label }) {
   return (
     <button className="bb" onClick={()=>window.open(url,"_blank","noopener,noreferrer")}
-      style={{width:"100%",padding:"14px",background:color,color:"white",
-        fontSize:16,borderRadius:14,
-        display:"flex",alignItems:"center",justifyContent:"center",gap:10,
+      style={{width:"100%",padding:"11px",background:color,color:"white",
+        fontSize:14,borderRadius:12,
+        display:"flex",alignItems:"center",justifyContent:"center",gap:8,
         boxShadow:`0 4px 14px ${color}44`,marginTop:4}}>
-      <span style={{fontSize:20}}>🔊</span> {label} 듣기
+      <span style={{fontSize:17}}>🔊</span> {label} 듣기
     </button>
   );
 }
@@ -807,19 +806,19 @@ function ChkRow({ label, ck, checks, toggle, color, icon="✅" }) {
   const done=!!checks[ck];
   return (
     <div onClick={()=>toggle(ck)}
-      style={{display:"flex",alignItems:"center",gap:14,
-        padding:"14px 16px",borderRadius:14,marginBottom:8,
+      style={{display:"flex",alignItems:"center",gap:10,
+        padding:"11px 14px",borderRadius:12,marginBottom:6,
         background:done?`${color}14`:"#fafafa",
         border:`2px solid ${done?color:"#e8e8e8"}`,
         cursor:"pointer",transition:"all .15s",userSelect:"none"}}>
-      <div style={{width:42,height:42,borderRadius:"50%",flexShrink:0,
-        background:done?color:"white",border:`3px solid ${done?color:"#ccc"}`,
+      <div style={{width:34,height:34,borderRadius:"50%",flexShrink:0,
+        background:done?color:"white",border:`2.5px solid ${done?color:"#ccc"}`,
         display:"flex",alignItems:"center",justifyContent:"center",
-        fontSize:18,fontWeight:900,color:"white",transition:"all .18s"}}>
+        fontSize:15,fontWeight:900,color:"white",transition:"all .18s"}}>
         {done?"✓":""}
       </div>
-      <span style={{fontSize:22}}>{icon}</span>
-      <span style={{fontSize:17,fontWeight:900,
+      <span style={{fontSize:18}}>{icon}</span>
+      <span style={{fontSize:14,fontWeight:900,
         color:done?color:C.dark,
         transition:"all .2s"}}>
         {done ? "다했어요! 🎉" : label}
@@ -840,26 +839,26 @@ function OptRow({ label, ck, checks, toggle, color, icon="📖" }) {
     <div style={{borderRadius:14,marginBottom:8,overflow:"hidden",
       border:`2px solid ${isOk?color:"#e8e8e8"}`,
       background:isOk?`${color}10`:"#fafafa",transition:"all .15s"}}>
-      <div style={{display:"flex",alignItems:"center",gap:10,padding:"12px 14px 8px"}}>
-        <span style={{fontSize:20}}>{icon}</span>
-        <span style={{fontSize:17,fontWeight:900,
+      <div style={{display:"flex",alignItems:"center",gap:8,padding:"10px 12px 6px"}}>
+        <span style={{fontSize:17}}>{icon}</span>
+        <span style={{fontSize:14,fontWeight:900,
           color:isDone?color:isNA?"#636e72":C.dark,
           transition:"all .2s",flex:1}}>
           {isDone ? "다했어요! 🎉" : isNA ? "없어요! ✔" : label}
         </span>
       </div>
-      <div style={{display:"flex",gap:8,padding:"0 12px 12px"}}>
+      <div style={{display:"flex",gap:6,padding:"0 12px 10px"}}>
         <button className="chk-btn" onClick={handleDone}
           style={{background:isDone?color:`${color}18`,
             color:isDone?"white":color,
-            border:`2.5px solid ${isDone?color:`${color}44`}`}}>
-          <span style={{fontSize:20}}>{isDone?"✓":"○"}</span><span>완료</span>
+            border:`2px solid ${isDone?color:`${color}44`}`}}>
+          <span style={{fontSize:16}}>{isDone?"✓":"○"}</span><span>완료</span>
         </button>
         <button className="chk-btn" onClick={handleNA}
           style={{background:isNA?"#636e72":"#f0f0f0",
             color:isNA?"white":"#888",
-            border:`2.5px solid ${isNA?"#636e72":"#ddd"}`}}>
-          <span style={{fontSize:20}}>{isNA?"✗":"—"}</span><span>없음</span>
+            border:`2px solid ${isNA?"#636e72":"#ddd"}`}}>
+          <span style={{fontSize:16}}>{isNA?"✗":"—"}</span><span>없음</span>
         </button>
       </div>
     </div>
@@ -871,32 +870,32 @@ function OptRow({ label, ck, checks, toggle, color, icon="📖" }) {
 ════════════════════════════════ */
 function Sec({ num, emoji, title, color }) {
   return (
-    <div style={{display:"flex",alignItems:"center",gap:10,
-      marginBottom:14,paddingBottom:10,borderBottom:`3px solid ${color}28`}}>
-      <div style={{width:34,height:34,borderRadius:"50%",background:color,
+    <div style={{display:"flex",alignItems:"center",gap:8,
+      marginBottom:10,paddingBottom:8,borderBottom:`2.5px solid ${color}28`}}>
+      <div style={{width:28,height:28,borderRadius:"50%",background:color,
         display:"flex",alignItems:"center",justifyContent:"center",
-        fontSize:13,fontWeight:900,color:"white",flexShrink:0}}>
+        fontSize:11,fontWeight:900,color:"white",flexShrink:0}}>
         {num}
       </div>
-      <span style={{fontSize:26}}>{emoji}</span>
-      <h2 style={{fontSize:19,fontWeight:900,color}}>{title}</h2>
+      <span style={{fontSize:20}}>{emoji}</span>
+      <h2 style={{fontSize:15,fontWeight:900,color}}>{title}</h2>
     </div>
   );
 }
 function SubSec({ num, label, color }) {
   return (
     <div style={{display:"flex",alignItems:"center",gap:7,marginBottom:8,marginTop:4}}>
-      <div style={{width:30,height:30,borderRadius:"50%",background:`${color}20`,
+      <div style={{width:24,height:24,borderRadius:"50%",background:`${color}20`,
         display:"flex",alignItems:"center",justifyContent:"center",
-        fontSize:11,fontWeight:900,color,flexShrink:0}}>{num}</div>
-      <span style={{fontSize:13,fontWeight:700,color:"#999"}}>{label}</span>
+        fontSize:10,fontWeight:900,color,flexShrink:0}}>{num}</div>
+      <span style={{fontSize:12,fontWeight:700,color:"#999"}}>{label}</span>
     </div>
   );
 }
 function Card({ color, children, idx=0, bg }) {
   return (
-    <div className="card" style={{background:bg||"white",borderRadius:22,
-      border:`3.5px solid ${color}`,padding:"20px 18px",marginBottom:14,
+    <div className="card" style={{background:bg||"white",borderRadius:18,
+      border:`3px solid ${color}`,padding:"14px 14px",marginBottom:10,
       boxShadow:`0 5px 20px ${color}1a`,animationDelay:`${idx*.07}s`}}>
       {children}
     </div>
@@ -924,14 +923,14 @@ function ListeningBoard({ checks, toggle, links }) {
           comeon:"linear-gradient(to bottom, #FFFFFF, #F5FAFD, #EDF5FB, #E0F0FF)"
         };
         return (
-        <div key={s.key} className="card" style={{background:bgs[s.key]||"white",borderRadius:24,
-          border:`4px solid ${s.color}`,padding:"24px 20px",marginBottom:14,
-          boxShadow:`0 6px 22px ${s.color}1a`,animationDelay:`${i*.08}s`}}>
-          <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:20}}>
-            <span style={{fontSize:48}}>{s.emoji}</span>
-            <h2 style={{fontSize:26,fontWeight:900,color:s.color}}>{s.label}</h2>
+        <div key={s.key} className="card" style={{background:bgs[s.key]||"white",borderRadius:18,
+          border:`3px solid ${s.color}`,padding:"14px 14px",marginBottom:10,
+          boxShadow:`0 5px 18px ${s.color}1a`,animationDelay:`${i*.08}s`}}>
+          <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:14}}>
+            <span style={{fontSize:36}}>{s.emoji}</span>
+            <h2 style={{fontSize:20,fontWeight:900,color:s.color}}>{s.label}</h2>
           </div>
-          <p style={{textAlign:"center",fontWeight:700,color:"#999",fontSize:15,marginBottom:14}}>
+          <p style={{textAlign:"center",fontWeight:700,color:"#999",fontSize:13,marginBottom:10}}>
             🎧 3번 듣고 따라하세요
           </p>
           <Rings prefix={`${s.key}_listen`} checks={checks} toggle={toggle} large color={s.color}/>
