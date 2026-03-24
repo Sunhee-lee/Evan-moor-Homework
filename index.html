@@ -632,69 +632,6 @@ function ButterflySVG({ pct }) {
 }
 
 /* ════════════════════════════════
-   BURGER SVG  (빈 접시 → 햄버거)
-════════════════════════════════ */
-function BurgerSVG({ pct }) {
-  const stage = pct===0?0 : pct<=20?1 : pct<=40?2 : pct<=60?3 : pct<=80?4 : pct<100?5 : 6;
-  const baseY = 78;
-  return (
-    <svg width={80} height={90} viewBox="0 0 80 90" style={{overflow:"visible"}}>
-      {/* plate */}
-      <ellipse cx={40} cy={baseY} rx={32} ry={7} fill="#E0E0E0"/>
-      <ellipse cx={40} cy={baseY-1} rx={28} ry={5} fill="#F5F5F5"/>
-      {stage===0 && <>
-        {/* empty plate with subtle shine */}
-        <ellipse cx={35} cy={baseY-3} rx={8} ry={2} fill="#FFF" opacity={.4}/>
-      </>}
-      {stage>=1 && <>
-        {/* bottom bun */}
-        <rect x={16} y={baseY-12} width={48} height={10} rx={5} fill="#E8A735"/>
-        <rect x={18} y={baseY-10} width={44} height={4} rx={2} fill="#D4952B"/>
-      </>}
-      {stage>=2 && <>
-        {/* patty */}
-        <rect x={14} y={baseY-20} width={52} height={9} rx={4} fill="#6D4C41"/>
-        <rect x={16} y={baseY-18} width={48} height={3} rx={1.5} fill="#8D6E63" opacity={.5}/>
-      </>}
-      {stage>=3 && <>
-        {/* cheese - slightly hanging over */}
-        <polygon points="12,{baseY-24} 18,{baseY-20} 62,{baseY-20} 68,{baseY-24} 65,{baseY-28} 15,{baseY-28}"
-          fill="#FFC107"
-          points={`12,${baseY-21} 10,${baseY-26} 15,${baseY-28} 65,${baseY-28} 70,${baseY-26} 68,${baseY-21}`}/>
-        {/* cheese drips */}
-        <path d={`M12 ${baseY-23} Q10 ${baseY-18} 13 ${baseY-16}`} fill="#FFC107"/>
-        <path d={`M68 ${baseY-23} Q70 ${baseY-18} 67 ${baseY-16}`} fill="#FFC107"/>
-      </>}
-      {stage>=4 && <>
-        {/* lettuce */}
-        <path d={`M12 ${baseY-30} Q20 ${baseY-35} 28 ${baseY-30} Q36 ${baseY-35} 44 ${baseY-30} Q52 ${baseY-35} 60 ${baseY-30} Q68 ${baseY-35} 68 ${baseY-30}`}
-          fill="#66BB6A" stroke="#4CAF50" strokeWidth={1}/>
-        {/* tomato */}
-        <rect x={16} y={baseY-36} width={48} height={5} rx={2.5} fill="#E53935"/>
-      </>}
-      {stage>=5 && <>
-        {/* top bun */}
-        <ellipse cx={40} cy={baseY-40} rx={26} ry={14} fill="#E8A735"/>
-        <ellipse cx={40} cy={baseY-42} rx={24} ry={11} fill="#F0B942"/>
-        {/* sesame seeds */}
-        {[[30,-48],[40,-50],[50,-48],[35,-44],[45,-44]].map(([sx,sy],i)=>
-          <ellipse key={i} cx={sx} cy={baseY+sy} rx={2.2} ry={1.3} fill="#FFF9C4" transform={`rotate(${i*25-20} ${sx} ${baseY+sy})`}/>
-        )}
-      </>}
-      {stage===6 && <>
-        {/* flag on top */}
-        <line x1={40} y1={baseY-54} x2={40} y2={baseY-68} stroke="#795548" strokeWidth={2}/>
-        <polygon points={`40,${baseY-68} 52,${baseY-64} 40,${baseY-60}`} fill="#E53935"/>
-        {/* sparkles */}
-        {[[10,15],[70,12],[8,50],[72,48],[40,5]].map(([sx,sy],i)=>
-          <text key={i} x={sx} y={sy} fontSize={10} textAnchor="middle" opacity={.85}>✨</text>
-        )}
-      </>}
-    </svg>
-  );
-}
-
-/* ════════════════════════════════
    HOUSE SVG  (땅 → 집짓기)
 ════════════════════════════════ */
 function HouseSVG({ pct }) {
@@ -777,7 +714,6 @@ const THEMES = {
   flower:    { label:"꽃",      icon:"🌸", Component: PlantSVG },
   dino:      { label:"공룡",    icon:"🦕", Component: DinoSVG },
   butterfly: { label:"나비",    icon:"🦋", Component: ButterflySVG },
-  burger:    { label:"햄버거",  icon:"🍔", Component: BurgerSVG },
   house:     { label:"집짓기",  icon:"🏠", Component: HouseSVG },
 };
 
@@ -1258,26 +1194,38 @@ function Settings({ links, setLinks, onClose, name, onChangeName, theme, setThem
         </div>
 
         {/* 테마 선택 */}
-        <div style={{marginBottom:24}}>
-          <div style={{fontSize:15,fontWeight:900,color:C.dark,marginBottom:14,
-            paddingBottom:8,borderBottom:"2px solid #F0F0F0"}}>
-            🎨 숙제진행률 테마
-          </div>
-          <div style={{display:"grid",gridTemplateColumns:"repeat(5,1fr)",gap:8}}>
-            {Object.entries(THEMES).map(([key,{label,icon}])=>(
-              <button key={key} className="bb" onClick={()=>setTheme(key)}
-                style={{padding:"12px 4px",textAlign:"center",
-                  background:theme===key?`${C.purple}18`:"#F8F8F8",
-                  border:`2.5px solid ${theme===key?C.purple:"#e8e8e8"}`,
-                  borderRadius:14,display:"flex",flexDirection:"column",
-                  alignItems:"center",gap:4}}>
-                <span style={{fontSize:24}}>{icon}</span>
-                <span style={{fontSize:11,fontWeight:800,
-                  color:theme===key?C.purple:C.gray}}>{label}</span>
+        {(() => {
+          const [selTheme, setSelTheme] = useState(theme);
+          return (
+            <div style={{marginBottom:24}}>
+              <div style={{fontSize:15,fontWeight:900,color:C.dark,marginBottom:14,
+                paddingBottom:8,borderBottom:"2px solid #F0F0F0"}}>
+                🎨 숙제진행률 테마
+              </div>
+              <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:8,marginBottom:12}}>
+                {Object.entries(THEMES).map(([key,{label,icon}])=>(
+                  <button key={key} className="bb" onClick={()=>setSelTheme(key)}
+                    style={{padding:"12px 4px",textAlign:"center",
+                      background:selTheme===key?`${C.purple}18`:"#F8F8F8",
+                      border:`2.5px solid ${selTheme===key?C.purple:"#e8e8e8"}`,
+                      borderRadius:14,display:"flex",flexDirection:"column",
+                      alignItems:"center",gap:4}}>
+                    <span style={{fontSize:24}}>{icon}</span>
+                    <span style={{fontSize:11,fontWeight:800,
+                      color:selTheme===key?C.purple:C.gray}}>{label}</span>
+                  </button>
+                ))}
+              </div>
+              <button className="bb" onClick={()=>{ setTheme(selTheme); onClose(); }}
+                style={{width:"100%",padding:"14px",
+                  background:"linear-gradient(135deg,#667eea,#764ba2)",
+                  color:"white",fontSize:15,
+                  boxShadow:"0 6px 20px rgba(102,126,234,.45)"}}>
+                테마 적용하기 ✔
               </button>
-            ))}
-          </div>
-        </div>
+            </div>
+          );
+        })()}
 
         {/* 링크 */}
         <div style={{marginBottom:8}}>
