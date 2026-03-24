@@ -160,6 +160,7 @@ function DonePopup({ name, onClose, theme }) {
     <div style={{position:"fixed",inset:0,zIndex:4000,display:"flex",
       alignItems:"center",justifyContent:"center",
       background:"rgba(0,0,0,.6)",backdropFilter:"blur(5px)"}}>
+      <Confetti/>
       <div style={{background:"white",borderRadius:36,padding:"48px 44px",
         textAlign:"center",zIndex:4002,maxWidth:420,width:"90%",
         animation:"scaleIn .5s cubic-bezier(.34,1.56,.64,1)",
@@ -187,9 +188,9 @@ function DonePopup({ name, onClose, theme }) {
           <button className="bb"
             onClick={()=>{window.open("https://evan.readinggate.com/ko/library","_blank","noopener,noreferrer");onClose();}}
             style={{flex:2,padding:"16px",
-              background:"linear-gradient(135deg,#FD79A8,#6C5CE7)",
+              background:"linear-gradient(135deg,#5EAAB5,#4A9BA6)",
               color:"white",fontSize:16,
-              boxShadow:"0 6px 20px rgba(253,121,168,.4)"}}>
+              boxShadow:"0 6px 20px rgba(94,170,181,.4)"}}>
             📚 Reading Gate 열기
           </button>
         </div>
