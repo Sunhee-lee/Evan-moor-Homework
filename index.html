@@ -1059,12 +1059,13 @@ function History({ onClose }) {
 
   return (
     <div style={{position:"fixed",inset:0,zIndex:2000,display:"flex",
-      alignItems:"flex-end",justifyContent:"center",
+      alignItems:"center",justifyContent:"center",
       background:"rgba(0,0,0,.5)",backdropFilter:"blur(4px)"}}
       onClick={e=>e.target===e.currentTarget&&onClose()}>
-      <div style={{background:"white",borderRadius:"28px 28px 0 0",
-        padding:"26px 20px 40px",width:"100%",maxWidth:540,
-        animation:"fadeUp .3s ease",boxShadow:"0 -12px 40px rgba(0,0,0,.2)"}}>
+      <div style={{background:"white",borderRadius:28,
+        padding:"26px 20px 30px",width:"92%",maxWidth:540,
+        animation:"scaleIn .25s ease",boxShadow:"0 12px 40px rgba(0,0,0,.18)",
+        maxHeight:"85vh",overflowY:"auto"}}>
         <div style={{display:"flex",justifyContent:"space-between",
           alignItems:"center",marginBottom:18}}>
           <h2 style={{fontSize:20,fontWeight:900,color:C.dark}}>📊 완료 기록</h2>
@@ -1087,7 +1088,7 @@ function History({ onClose }) {
             </div>
             <div style={{display:"flex",gap:10,justifyContent:"center"}}>
               <button className="bb" onClick={doReset}
-                style={{padding:"12px 28px",background:C.purple,color:"white",fontSize:15}}>
+                style={{padding:"12px 28px",background:"#5EAAB5",color:"white",fontSize:15}}>
                 확인
               </button>
               <button className="bb" onClick={()=>setConfirmReset(false)}
@@ -1102,9 +1103,9 @@ function History({ onClose }) {
           {[["week","최근 1주(평일)"],["month","최근 1달(평일)"]].map(([v,l])=>(
             <button key={v} className="bb" onClick={()=>setTab(v)}
               style={{flex:1,padding:"11px",
-                background:tab===v?C.purple:"white",
-                border:`2.5px solid ${C.purple}`,
-                color:tab===v?"white":C.purple,fontSize:14}}>
+                background:tab===v?"#5EAAB5":"white",
+                border:"2.5px solid #5EAAB5",
+                color:tab===v?"white":"#5EAAB5",fontSize:14}}>
               {l}
             </button>
           ))}
@@ -1120,10 +1121,10 @@ function History({ onClose }) {
             return (
               <div key={date}
                 style={{borderRadius:12,padding:"8px 4px",textAlign:"center",
-                  background:done?"#2ED57318":isToday?`${C.purple}12`:"#f8f8f8",
-                  border:`2px solid ${done?"#2ED573":isToday?C.purple:"#ececec"}`}}>
+                  background:done?"#2ED57318":isToday?"#5EAAB512":"#f8f8f8",
+                  border:`2px solid ${done?"#2ED573":isToday?"#5EAAB5":"#ececec"}`}}>
                 <div style={{fontSize:11,fontWeight:700,
-                  color:isToday?C.purple:C.gray,marginBottom:4}}>
+                  color:isToday?"#5EAAB5":C.gray,marginBottom:4}}>
                   {fmtDate(date)}
                 </div>
                 <div style={{fontSize:22}}>
@@ -1144,13 +1145,13 @@ function History({ onClose }) {
           const total=dates.length;
           const completed=dates.filter(d=>history[d]?.done).length;
           return (
-            <div style={{marginTop:18,background:`${C.purple}10`,
+            <div style={{marginTop:18,background:"#5EAAB510",
               borderRadius:14,padding:"14px 18px",
               display:"flex",justifyContent:"space-between",alignItems:"center"}}>
               <span style={{fontWeight:800,fontSize:15,color:C.dark}}>
                 {tab==="week"?"1주일":"한 달"} 완료율
               </span>
-              <span style={{fontWeight:900,fontSize:22,color:C.purple}}>
+              <span style={{fontWeight:900,fontSize:22,color:"#5EAAB5"}}>
                 {total===0?0:Math.round((completed/total)*100)}%
                 <span style={{fontSize:14,fontWeight:700,color:"#aaa",marginLeft:6}}>
                   ({completed}/{total}일)
@@ -1186,12 +1187,12 @@ function Settings({ links, setLinks, onClose, name, onChangeName, theme, setThem
   );
   return (
     <div style={{position:"fixed",inset:0,zIndex:2000,display:"flex",
-      alignItems:"flex-end",justifyContent:"center",
+      alignItems:"center",justifyContent:"center",
       background:"rgba(0,0,0,.5)",backdropFilter:"blur(4px)"}}
       onClick={e=>e.target===e.currentTarget&&onClose()}>
-      <div style={{background:"white",borderRadius:"28px 28px 0 0",
-        padding:"26px 20px 40px",width:"100%",maxWidth:540,
-        animation:"fadeUp .3s ease",boxShadow:"0 -12px 40px rgba(0,0,0,.2)",
+      <div style={{background:"white",borderRadius:28,
+        padding:"26px 20px 30px",width:"92%",maxWidth:540,
+        animation:"scaleIn .25s ease",boxShadow:"0 12px 40px rgba(0,0,0,.18)",
         maxHeight:"85vh",overflowY:"auto"}}>
         <div style={{display:"flex",justifyContent:"space-between",
           alignItems:"center",marginBottom:20}}>
@@ -1227,7 +1228,7 @@ function Settings({ links, setLinks, onClose, name, onChangeName, theme, setThem
                 style={{width:"100%",padding:"14px",
                   background:"linear-gradient(135deg,#8ED0E0,#5EAAB5)",
                   color:"white",fontSize:15,
-                  boxShadow:"0 6px 20px rgba(94,170,181,.45)"}}>
+                  boxShadow:"0 4px 12px rgba(94,170,181,.2)"}}>
                 테마 적용하기 ✔
               </button>
             </div>
@@ -1247,13 +1248,13 @@ function Settings({ links, setLinks, onClose, name, onChangeName, theme, setThem
             style={{width:"100%",padding:"15px",
               background:"linear-gradient(135deg,#8ED0E0,#5EAAB5)",
               color:"white",fontSize:16,
-              boxShadow:"0 6px 20px rgba(94,170,181,.45)"}}>
+              boxShadow:"0 4px 12px rgba(94,170,181,.2)"}}>
             링크 저장하기 ✔
           </button>
         </div>
 
         {/* 이름 변경 */}
-        <div style={{marginBottom:8}}>
+        <div style={{marginTop:16,marginBottom:8}}>
           <div style={{fontSize:15,fontWeight:900,color:C.dark,marginBottom:14,
             paddingBottom:8,borderBottom:"2px solid #F0F0F0"}}>
             ✏️ 이름 변경
@@ -1269,7 +1270,7 @@ function Settings({ links, setLinks, onClose, name, onChangeName, theme, setThem
             style={{width:"100%",marginTop:10,padding:"15px",
               background:"linear-gradient(135deg,#8ED0E0,#5EAAB5)",
               color:"white",fontSize:16,
-              boxShadow:"0 6px 20px rgba(94,170,181,.45)"}}>
+              boxShadow:"0 4px 12px rgba(94,170,181,.2)"}}>
             이름 저장하기 ✔
           </button>
         </div>
