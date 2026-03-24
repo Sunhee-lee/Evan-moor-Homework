@@ -742,12 +742,21 @@ function History({ onClose }) {
     setConfirmReset(false);
   };
 
-  const getDates = (n) => Array.from({length:n},(_,i)=>{
-    const d = new Date(); d.setDate(d.getDate()-i);
-    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
-  }).reverse();
+  const getDates = (n) => {
+    const result = [];
+    let offset = 0;
+    while (result.length < n) {
+      const d = new Date(); d.setDate(d.getDate()-offset);
+      const day = d.getDay();
+      if (day !== 0 && day !== 6) {
+        result.push(`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`);
+      }
+      offset++;
+    }
+    return result.reverse();
+  };
 
-  const dates = getDates(tab==="week" ? 7 : 30);
+  const dates = getDates(tab==="week" ? 5 : 22);
 
   const fmtDate = (s) => {
     const [,m,d] = s.split("-");
@@ -797,7 +806,7 @@ function History({ onClose }) {
         )}
         {/* tab */}
         <div style={{display:"flex",gap:8,marginBottom:18}}>
-          {[["week","최근 7일"],["month","최근 30일"]].map(([v,l])=>(
+          {[["week","최근 1주(평일)"],["month","최근 1달(평일)"]].map(([v,l])=>(
             <button key={v} className="bb" onClick={()=>setTab(v)}
               style={{flex:1,padding:"11px",
                 background:tab===v?C.purple:"white",
@@ -809,7 +818,7 @@ function History({ onClose }) {
         </div>
         {/* grid */}
         <div style={{display:"grid",
-          gridTemplateColumns:tab==="week"?"repeat(7,1fr)":"repeat(7,1fr)",
+          gridTemplateColumns:tab==="week"?"repeat(5,1fr)":"repeat(5,1fr)",
           gap:6}}>
           {dates.map(date=>{
             const rec=history[date];
