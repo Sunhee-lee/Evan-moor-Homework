@@ -154,25 +154,28 @@ function Confetti() {
 /* ════════════════════════════════
    DONE POPUP  (완료 → Reading Gate)
 ════════════════════════════════ */
-function DonePopup({ name, onClose }) {
+function DonePopup({ name, onClose, theme }) {
+  const ThemeSVG = (THEMES[theme] || THEMES.flower).Component;
   return (
     <div style={{position:"fixed",inset:0,zIndex:4000,display:"flex",
       alignItems:"center",justifyContent:"center",
       background:"rgba(0,0,0,.6)",backdropFilter:"blur(5px)"}}>
-      <Confetti/>
       <div style={{background:"white",borderRadius:36,padding:"48px 44px",
         textAlign:"center",zIndex:4002,maxWidth:420,width:"90%",
         animation:"scaleIn .5s cubic-bezier(.34,1.56,.64,1)",
         boxShadow:"0 28px 80px rgba(0,0,0,.3)",position:"relative"}}>
-        <div style={{fontSize:84,animation:"sway 1.1s ease-in-out infinite",marginBottom:8}}>🎉</div>
+        <div style={{display:"flex",justifyContent:"center",marginBottom:8,
+          animation:"sway 1.1s ease-in-out infinite",transformOrigin:"center bottom"}}>
+          <ThemeSVG pct={100}/>
+        </div>
         <div style={{fontSize:40,fontWeight:900,color:C.dark,lineHeight:1.2,marginBottom:10}}>
           Great Job,<br/>{name}!
         </div>
         <div style={{fontSize:19,color:"#888",marginBottom:8}}>
           모든 숙제를 끝냈어요! 👏🌟
         </div>
-        <div style={{fontSize:18,fontWeight:800,color:C.purple,marginBottom:28,
-          background:`${C.purple}14`,borderRadius:14,padding:"14px 18px"}}>
+        <div style={{fontSize:18,fontWeight:800,color:"#5EAAB5",marginBottom:28,
+          background:"#5EAAB514",borderRadius:14,padding:"14px 18px"}}>
           이제 <span style={{color:"#FD79A8"}}>📚 Reading Gate</span>를<br/>하러 가세요~
         </div>
         <div style={{display:"flex",gap:12}}>
@@ -886,9 +889,9 @@ function SubSec({ num, label, color }) {
     </div>
   );
 }
-function Card({ color, children, idx=0 }) {
+function Card({ color, children, idx=0, bg }) {
   return (
-    <div className="card" style={{background:"white",borderRadius:22,
+    <div className="card" style={{background:bg||"white",borderRadius:22,
       border:`3.5px solid ${color}`,padding:"20px 18px",marginBottom:14,
       boxShadow:`0 5px 20px ${color}1a`,animationDelay:`${idx*.07}s`}}>
       {children}
@@ -937,71 +940,71 @@ function ListeningBoard({ checks, toggle, links }) {
 function ComprehensiveBoard({ checks, toggle, links }) {
   return (
     <div style={{padding:"8px 18px 80px"}}>
-      <Card color={C.yellow} idx={0}>
-        <Sec num="1" emoji="📝" title="Vocabulary" color={C.yellow}/>
-        <SubSec num="1-1" label="영어노트" color={C.yellow}/>
+      <Card color="#E8B730" idx={0} bg="linear-gradient(135deg, #FFFDE7, #FFF8E1, #FFF3CD)">
+        <Sec num="1" emoji="📝" title="Vocabulary" color="#E8B730"/>
+        <SubSec num="1-1" label="영어노트" color="#E8B730"/>
         <ChkRow label="영어노트에 단어와 뜻을 쓰세요"
-          ck="voca" checks={checks} toggle={toggle} color={C.yellow} icon="📒"/>
-        <SubSec num="1-2" label="영어전달" color={C.yellow}/>
+          ck="voca" checks={checks} toggle={toggle} color="#E8B730" icon="📒"/>
+        <SubSec num="1-2" label="영어전달" color="#E8B730"/>
         <ChkRow label="영어노트에 영어전달을 쓰고 말해보세요"
-          ck="dictation" checks={checks} toggle={toggle} color={C.yellow} icon="📒"/>
-        <SubSec num="1-3" label="틀린단어" color={C.yellow}/>
+          ck="dictation" checks={checks} toggle={toggle} color="#E8B730" icon="📒"/>
+        <SubSec num="1-3" label="틀린단어" color="#E8B730"/>
         <OptRow label="틀린단어가 있으면 세번 쓰세요"
-          ck="wrong_words" checks={checks} toggle={toggle} color={C.yellow} icon="✏️"/>
+          ck="wrong_words" checks={checks} toggle={toggle} color="#E8B730" icon="✏️"/>
       </Card>
 
-      <Card color={C.wonders} idx={1}>
-        <Sec num="3" emoji="📕" title="Wonders" color={C.wonders}/>
+      <Card color="#E88A8A" idx={1} bg="linear-gradient(135deg, #FFF0F0, #FFE8E8, #FFDEDE)">
+        <Sec num="2" emoji="📕" title="Wonders" color="#E88A8A"/>
         <p style={{textAlign:"center",fontWeight:700,color:"#999",fontSize:13,marginBottom:12}}>
           🎧 3번 듣고 따라하세요
         </p>
-        <Rings prefix="wonders_listen" checks={checks} toggle={toggle} color={C.wonders}/>
+        <Rings prefix="wonders_listen" checks={checks} toggle={toggle} color="#E88A8A"/>
         <div style={{marginTop:16}}>
-          <AudioBtn url={links.wonders} color={C.wonders} label="Wonders"/>
+          <AudioBtn url={links.wonders} color="#E88A8A" label="Wonders"/>
         </div>
-        <Div color={C.wonders}/>
-        <SubSec num="3-1" label="Home Workbook" color={C.wonders}/>
+        <Div color="#E88A8A"/>
+        <SubSec num="2-1" label="Home Workbook" color="#E88A8A"/>
         <OptRow label="Wonders Homework Workbook 해당 page를 하세요"
-          ck="wonders_hwb" checks={checks} toggle={toggle} color={C.wonders} icon="📃"/>
+          ck="wonders_hwb" checks={checks} toggle={toggle} color="#E88A8A" icon="📃"/>
       </Card>
 
-      <Card color={C.bricks} idx={2}>
-        <Sec num="4" emoji="📗" title="Bricks Reading" color={C.bricks}/>
+      <Card color="#6BC5A0" idx={2} bg="linear-gradient(135deg, #E8FFF5, #E0F8EE, #D5F5E3)">
+        <Sec num="3" emoji="📗" title="Bricks Reading" color="#6BC5A0"/>
         <p style={{textAlign:"center",fontWeight:700,color:"#999",fontSize:13,marginBottom:12}}>
           🎧 3번 듣고 따라하세요
         </p>
-        <Rings prefix="bricks_listen" checks={checks} toggle={toggle} color={C.bricks}/>
+        <Rings prefix="bricks_listen" checks={checks} toggle={toggle} color="#6BC5A0"/>
         <div style={{marginTop:16}}>
-          <AudioBtn url={links.bricks} color={C.bricks} label="Bricks Reading"/>
+          <AudioBtn url={links.bricks} color="#6BC5A0" label="Bricks Reading"/>
         </div>
-        <Div color={C.bricks}/>
-        <SubSec num="4-1" label="Homework Book" color={C.bricks}/>
+        <Div color="#6BC5A0"/>
+        <SubSec num="3-1" label="Homework Book" color="#6BC5A0"/>
         <OptRow label="Bricks Reading Homework Book을 하세요"
-          ck="bricks_hwb" checks={checks} toggle={toggle} color={C.bricks} icon="📃"/>
-        <SubSec num="4-2" label="Workbook" color={C.bricks}/>
+          ck="bricks_hwb" checks={checks} toggle={toggle} color="#6BC5A0" icon="📃"/>
+        <SubSec num="3-2" label="Workbook" color="#6BC5A0"/>
         <OptRow label="Bricks Reading Workbook을 하세요"
-          ck="bricks_wb" checks={checks} toggle={toggle} color={C.bricks} icon="📗"/>
+          ck="bricks_wb" checks={checks} toggle={toggle} color="#6BC5A0" icon="📗"/>
       </Card>
 
-      <Card color={C.comeon} idx={3}>
-        <Sec num="5" emoji="📘" title="Come On Phonics" color={C.comeon}/>
+      <Card color="#7BAFD4" idx={3} bg="linear-gradient(135deg, #EAF4FB, #E0F0FF, #D6ECFF)">
+        <Sec num="4" emoji="📘" title="Come On Phonics" color="#7BAFD4"/>
         <p style={{textAlign:"center",fontWeight:700,color:"#999",fontSize:13,marginBottom:12}}>
           🎧 3번 듣고 따라하세요
         </p>
-        <Rings prefix="comeon_listen" checks={checks} toggle={toggle} color={C.comeon}/>
+        <Rings prefix="comeon_listen" checks={checks} toggle={toggle} color="#7BAFD4"/>
         <div style={{marginTop:16}}>
-          <AudioBtn url={links.comeon} color={C.comeon} label="Come On Phonics"/>
+          <AudioBtn url={links.comeon} color="#7BAFD4" label="Come On Phonics"/>
         </div>
-        <Div color={C.comeon}/>
-        <SubSec num="5-1" label="Workbook" color={C.comeon}/>
+        <Div color="#7BAFD4"/>
+        <SubSec num="4-1" label="Workbook" color="#7BAFD4"/>
         <OptRow label="Come On Phonics Workbook 해당 page를 하세요"
-          ck="comeon_wb" checks={checks} toggle={toggle} color={C.comeon} icon="📘"/>
+          ck="comeon_wb" checks={checks} toggle={toggle} color="#7BAFD4" icon="📘"/>
       </Card>
 
-      <Card color={C.gray} idx={4}>
-        <Sec num="6" emoji="📄" title="John Teacher 숙제" color={C.gray}/>
+      <Card color="#A0A0A0" idx={4} bg="linear-gradient(135deg, #F5F5F5, #F0F0F0, #EBEBEB)">
+        <Sec num="5" emoji="📄" title="John Teacher 숙제" color="#A0A0A0"/>
         <OptRow label="선생님 paper 숙제를 하세요"
-          ck="john_paper" checks={checks} toggle={toggle} color={C.gray} icon="✏️"/>
+          ck="john_paper" checks={checks} toggle={toggle} color="#A0A0A0" icon="✏️"/>
       </Card>
     </div>
   );
@@ -1340,7 +1343,7 @@ function App() {
       <FloatingProgress {...progress} theme={theme}/>
 
       {showDone && (
-        <DonePopup name={name} onClose={()=>setShowDone(false)}/>
+        <DonePopup name={name} theme={theme} onClose={()=>setShowDone(false)}/>
       )}
       {showHist  && <History     onClose={()=>setShowHist(false)}/>}
       {showSettings && <Settings links={links} setLinks={setLinks}
@@ -1350,6 +1353,11 @@ function App() {
       {showNamePopup && (
         <NamePopup onDone={(n)=>{ saveName(n); setShowNamePopup(false); }}/>
       )}
+
+      <div style={{textAlign:"center",padding:"24px 0 16px",
+        fontSize:11,fontWeight:600,color:"#bbb",letterSpacing:".3px"}}>
+        created by 이츠써니
+      </div>
     </div>
   );
 }
