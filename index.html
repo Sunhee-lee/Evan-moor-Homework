@@ -229,6 +229,9 @@ const JUNDAL_IMAGES = [
   "https://lh3.googleusercontent.com/d/10gDexBvm6YdS5oQ1xNLpyBzu1ZFqXGVx",
   "https://lh3.googleusercontent.com/d/1TFB3_aARZXCxbWesKQuOfif0eV7XCqWi",
 ];
+const WONDERS_LISTEN_IMG = ["https://lh3.googleusercontent.com/d/1s8ZJLp0rdfdLpZZo3dqFP8sw00GoFwOA"];
+const BRICKS_LISTEN_IMG = ["https://lh3.googleusercontent.com/d/1cabPy3zTHLSPdtZ2aky-y6Mml1PJtYBq"];
+const COMEON_LISTEN_IMG = ["https://lh3.googleusercontent.com/d/1sSF3GzKopwPubGIA2qt-a5d5T8wLHPhm"];
 
 function ImageViewer({ title, images, onClose }) {
   const [idx, setIdx] = useState(0);
@@ -1004,6 +1007,8 @@ function Div({ color }) {
    LISTENING BOARD
 ════════════════════════════════ */
 function ListeningBoard({ checks, toggle, links }) {
+  const [viewImages, setViewImages] = useState(null);
+  const listenImgs={wonders:WONDERS_LISTEN_IMG,bricks:BRICKS_LISTEN_IMG,comeon:COMEON_LISTEN_IMG};
   const subs=[
     {key:"wonders",color:"#E88A8A",emoji:"📕",label:"Wonders"},
     {key:"bricks", color:"#6BC5A0", emoji:"📗",label:"Bricks Reading"},
@@ -1011,6 +1016,10 @@ function ListeningBoard({ checks, toggle, links }) {
   ];
   return (
     <div style={{padding:"8px 18px 80px"}}>
+      {viewImages && (
+        <ImageViewer title={viewImages.title} images={viewImages.images}
+          onClose={()=>setViewImages(null)}/>
+      )}
       {subs.map((s,i)=>{
         const bgs={
           wonders:"linear-gradient(to bottom, #FFFFFF, #FFF8F8, #FFF0F0, #FFE8E8)",
@@ -1025,6 +1034,12 @@ function ListeningBoard({ checks, toggle, links }) {
             <span style={{fontSize:36}}>{s.emoji}</span>
             <h2 style={{fontSize:20,fontWeight:900,color:s.color}}>{s.label}</h2>
           </div>
+          <button className="bb" onClick={()=>setViewImages({title:`${s.emoji} ${s.label} 듣기 내용`,images:listenImgs[s.key]})}
+            style={{width:"100%",padding:"10px",marginBottom:8,borderRadius:12,
+              background:`linear-gradient(135deg,${s.color},${s.color}cc)`,color:"white",
+              fontSize:14,fontWeight:800,boxShadow:`0 3px 10px ${s.color}4d`}}>
+            📸 이번 달 듣기 내용 보기
+          </button>
           <p style={{textAlign:"center",fontWeight:700,color:"#999",fontSize:13,marginBottom:10}}>
             🎧 3번씩 듣고 따라하세요
           </p>
@@ -1076,6 +1091,12 @@ function ComprehensiveBoard({ checks, toggle, links }) {
 
       <Card color="#E88A8A" idx={1} bg="linear-gradient(to bottom, #FFFFFF, #FFF8F8, #FFF0F0, #FFE8E8)">
         <Sec num="2" emoji="📕" title="Wonders" color="#E88A8A"/>
+        <button className="bb" onClick={()=>setViewImages({title:"📕 Wonders 듣기 내용",images:WONDERS_LISTEN_IMG})}
+          style={{width:"100%",padding:"10px",marginBottom:8,borderRadius:12,
+            background:"linear-gradient(135deg,#E88A8A,#D47070)",color:"white",
+            fontSize:14,fontWeight:800,boxShadow:"0 3px 10px rgba(232,138,138,.3)"}}>
+          📸 이번 달 듣기 내용 보기
+        </button>
         <p style={{textAlign:"center",fontWeight:700,color:"#999",fontSize:13,marginBottom:12}}>
           🎧 3번씩 듣고 따라하세요
         </p>
@@ -1091,6 +1112,12 @@ function ComprehensiveBoard({ checks, toggle, links }) {
 
       <Card color="#6BC5A0" idx={2} bg="linear-gradient(to bottom, #FFFFFF, #F6FDF9, #EDFAF3, #E0F8EE)">
         <Sec num="3" emoji="📗" title="Bricks Reading" color="#6BC5A0"/>
+        <button className="bb" onClick={()=>setViewImages({title:"📗 Bricks Reading 듣기 내용",images:BRICKS_LISTEN_IMG})}
+          style={{width:"100%",padding:"10px",marginBottom:8,borderRadius:12,
+            background:"linear-gradient(135deg,#6BC5A0,#52B088)",color:"white",
+            fontSize:14,fontWeight:800,boxShadow:"0 3px 10px rgba(107,197,160,.3)"}}>
+          📸 이번 달 듣기 내용 보기
+        </button>
         <p style={{textAlign:"center",fontWeight:700,color:"#999",fontSize:13,marginBottom:12}}>
           🎧 3번씩 듣고 따라하세요
         </p>
@@ -1109,6 +1136,12 @@ function ComprehensiveBoard({ checks, toggle, links }) {
 
       <Card color="#7BAFD4" idx={3} bg="linear-gradient(to bottom, #FFFFFF, #F5FAFD, #EDF5FB, #E0F0FF)">
         <Sec num="4" emoji="📘" title="Come On Phonics" color="#7BAFD4"/>
+        <button className="bb" onClick={()=>setViewImages({title:"📘 Come On Phonics 듣기 내용",images:COMEON_LISTEN_IMG})}
+          style={{width:"100%",padding:"10px",marginBottom:8,borderRadius:12,
+            background:"linear-gradient(135deg,#7BAFD4,#6199BE)",color:"white",
+            fontSize:14,fontWeight:800,boxShadow:"0 3px 10px rgba(123,175,212,.3)"}}>
+          📸 이번 달 듣기 내용 보기
+        </button>
         <p style={{textAlign:"center",fontWeight:700,color:"#999",fontSize:13,marginBottom:12}}>
           🎧 3번씩 듣고 따라하세요
         </p>
