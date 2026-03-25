@@ -216,6 +216,80 @@ function DonePopup({ name, onClose, theme }) {
 }
 
 /* ════════════════════════════════
+   IMAGE VIEWER  (단어 / 영어전달 사진 보기)
+════════════════════════════════ */
+const VOCAB_IMAGES = [
+  "https://lh3.googleusercontent.com/d/13hZLty3VgiodTyTYgLM-Ydp1qx97tEKV",
+  "https://lh3.googleusercontent.com/d/1F3uD_jcxLqPRaXvayYjk93ZHiPYLY8zA",
+  "https://lh3.googleusercontent.com/d/1ugs4QfJetm-CnxWqNH15_0Y--AycUkup",
+];
+const JUNDAL_IMAGES = [
+  "https://lh3.googleusercontent.com/d/10gDexBvm6YdS5oQ1xNLpyBzu1ZFqXGVx",
+  "https://lh3.googleusercontent.com/d/1TFB3_aARZXCxbWesKQuOfif0eV7XCqWi",
+];
+
+function ImageViewer({ title, images, onClose }) {
+  const [idx, setIdx] = useState(0);
+  const prev = () => setIdx(i => Math.max(0, i - 1));
+  const next = () => setIdx(i => Math.min(images.length - 1, i + 1));
+  /* swipe */
+  const touchRef = React.useRef(null);
+  const onTouchStart = e => { touchRef.current = e.touches[0].clientX; };
+  const onTouchEnd = e => {
+    if (touchRef.current === null) return;
+    const diff = e.changedTouches[0].clientX - touchRef.current;
+    if (diff > 50) prev();
+    if (diff < -50) next();
+    touchRef.current = null;
+  };
+  return (
+    <div style={{position:"fixed",inset:0,zIndex:5000,display:"flex",
+      alignItems:"center",justifyContent:"center",
+      background:"rgba(0,0,0,.85)",backdropFilter:"blur(6px)"}}
+      onClick={onClose}>
+      <div style={{position:"relative",maxWidth:500,width:"95%",textAlign:"center"}}
+        onClick={e=>e.stopPropagation()}>
+        {/* title */}
+        <div style={{color:"white",fontSize:20,fontWeight:900,marginBottom:12}}>
+          {title} ({idx+1}/{images.length})
+        </div>
+        {/* image */}
+        <div onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}
+          style={{borderRadius:16,overflow:"hidden",background:"white",minHeight:200,
+            display:"flex",alignItems:"center",justifyContent:"center"}}>
+          <img src={images[idx]} alt={`${title} ${idx+1}`}
+            style={{width:"100%",display:"block"}}/>
+        </div>
+        {/* nav buttons */}
+        {images.length > 1 && (
+          <div style={{display:"flex",justifyContent:"center",gap:16,marginTop:14}}>
+            <button onClick={prev} disabled={idx===0}
+              style={{padding:"10px 24px",borderRadius:12,border:"none",
+                fontSize:18,fontWeight:800,cursor:"pointer",
+                background:idx===0?"#555":"white",color:idx===0?"#888":"#333"}}>
+              ◀ 이전
+            </button>
+            <button onClick={next} disabled={idx===images.length-1}
+              style={{padding:"10px 24px",borderRadius:12,border:"none",
+                fontSize:18,fontWeight:800,cursor:"pointer",
+                background:idx===images.length-1?"#555":"white",
+                color:idx===images.length-1?"#888":"#333"}}>
+              다음 ▶
+            </button>
+          </div>
+        )}
+        {/* close */}
+        <button onClick={onClose}
+          style={{marginTop:14,padding:"10px 32px",borderRadius:12,border:"none",
+            background:"#ff6b6b",color:"white",fontSize:16,fontWeight:800,cursor:"pointer"}}>
+          닫기 ✕
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/* ════════════════════════════════
    ONBOARDING
 ════════════════════════════════ */
 /* ════════════════════════════════
@@ -966,16 +1040,33 @@ function ListeningBoard({ checks, toggle, links }) {
    COMPREHENSIVE BOARD
 ════════════════════════════════ */
 function ComprehensiveBoard({ checks, toggle, links }) {
+  const [viewImages, setViewImages] = useState(null);
   return (
     <div style={{padding:"8px 18px 80px"}}>
+      {viewImages && (
+        <ImageViewer title={viewImages.title} images={viewImages.images}
+          onClose={()=>setViewImages(null)}/>
+      )}
       <Card color="#E8B730" idx={0} bg="linear-gradient(to bottom, #FFFFFF, #FFFEF8, #FFFDE7, #FFF8E1)">
         <Sec num="1" emoji="📝" title="Vocabulary" color="#E8B730"/>
         <SubSec num="1-1" label="영어노트" color="#E8B730"/>
         <ChkRow label="영어노트에 단어와 뜻을 쓰세요"
           ck="voca" checks={checks} toggle={toggle} color="#E8B730" icon="📒"/>
+        <button className="bb" onClick={()=>setViewImages({title:"📒 이번 달 단어",images:VOCAB_IMAGES})}
+          style={{width:"100%",padding:"10px",marginBottom:8,borderRadius:12,
+            background:"linear-gradient(135deg,#E8B730,#D4A520)",color:"white",
+            fontSize:14,fontWeight:800,boxShadow:"0 3px 10px rgba(232,183,48,.3)"}}>
+          📸 이번 달 단어 보기
+        </button>
         <SubSec num="1-2" label="영어전달" color="#E8B730"/>
         <ChkRow label="영어노트에 영어전달을 쓰고 말해보세요"
           ck="dictation" checks={checks} toggle={toggle} color="#E8B730" icon="📒"/>
+        <button className="bb" onClick={()=>setViewImages({title:"📒 이번 달 영어전달",images:JUNDAL_IMAGES})}
+          style={{width:"100%",padding:"10px",marginBottom:8,borderRadius:12,
+            background:"linear-gradient(135deg,#E8B730,#D4A520)",color:"white",
+            fontSize:14,fontWeight:800,boxShadow:"0 3px 10px rgba(232,183,48,.3)"}}>
+          📸 이번 달 영어전달 보기
+        </button>
         <SubSec num="1-3" label="틀린단어" color="#E8B730"/>
         <OptRow label="틀린단어가 있으면 세번 쓰세요"
           ck="wrong_words" checks={checks} toggle={toggle} color="#E8B730" icon="✏️"/>
