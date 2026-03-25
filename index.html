@@ -132,7 +132,6 @@ function getItems(mode) {
   return [
     {ck:"voca",type:"bool"}, {ck:"dictation",type:"bool"}, {ck:"wrong_words",type:"opt"},
     {ck:"wonders_listen_0",type:"bool"},{ck:"wonders_listen_1",type:"bool"},{ck:"wonders_listen_2",type:"bool"},
-    {ck:"wonders_wb",type:"opt"},
     {ck:"wonders_hwb",type:"opt"},
     {ck:"bricks_listen_0",type:"bool"},{ck:"bricks_listen_1",type:"bool"},{ck:"bricks_listen_2",type:"bool"},
     {ck:"bricks_hwb",type:"opt"},
@@ -992,12 +991,9 @@ function ComprehensiveBoard({ checks, toggle, links }) {
           <AudioBtn url={links.wonders} color="#E88A8A" label="Wonders"/>
         </div>
         <Div color="#E88A8A"/>
-        <SubSec num="2-1" label="Workbook" color="#E88A8A"/>
-        <OptRow label="Wonders Workbook 해당 page를 하세요"
-          ck="wonders_wb" checks={checks} toggle={toggle} color="#E88A8A" icon="📕"/>
-        <SubSec num="2-2" label="Home Workbook" color="#E88A8A"/>
-        <OptRow label="Wonders Homework Workbook 해당 page를 하세요"
-          ck="wonders_hwb" checks={checks} toggle={toggle} color="#E88A8A" icon="📃"/>
+        <SubSec num="2-1" label="Home Workbook" color="#E88A8A"/>
+        <OptRow label="Wonders Homework Book 해당 page를 하세요"
+          ck="wonders_hwb" checks={checks} toggle={toggle} color="#E88A8A" icon="📋"/>
       </Card>
 
       <Card color="#6BC5A0" idx={2} bg="linear-gradient(to bottom, #FFFFFF, #F6FDF9, #EDFAF3, #E0F8EE)">
@@ -1011,11 +1007,11 @@ function ComprehensiveBoard({ checks, toggle, links }) {
         </div>
         <Div color="#6BC5A0"/>
         <SubSec num="3-1" label="Workbook" color="#6BC5A0"/>
-        <OptRow label="Bricks Reading Workbook을 하세요"
+        <OptRow label="Bricks Reading Workbook 해당 Unit을 하세요"
           ck="bricks_wb" checks={checks} toggle={toggle} color="#6BC5A0" icon="📗"/>
         <SubSec num="3-2" label="Homework Book" color="#6BC5A0"/>
-        <OptRow label="Bricks Reading Homework Book을 하세요"
-          ck="bricks_hwb" checks={checks} toggle={toggle} color="#6BC5A0" icon="📃"/>
+        <OptRow label="Bricks Reading Homework Book 해당 Unit을 하세요"
+          ck="bricks_hwb" checks={checks} toggle={toggle} color="#6BC5A0" icon="📋"/>
       </Card>
 
       <Card color="#7BAFD4" idx={3} bg="linear-gradient(to bottom, #FFFFFF, #F5FAFD, #EDF5FB, #E0F0FF)">
