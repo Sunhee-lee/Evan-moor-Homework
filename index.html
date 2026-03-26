@@ -249,21 +249,24 @@ function ImageViewer({ title, images, onClose }) {
   };
   return (
     <div style={{position:"fixed",inset:0,zIndex:5000,display:"flex",
-      alignItems:"center",justifyContent:"center",
-      background:"rgba(0,0,0,.85)",backdropFilter:"blur(6px)"}}
+      flexDirection:"column",alignItems:"center",justifyContent:"center",
+      background:"rgba(0,0,0,.85)",backdropFilter:"blur(6px)",
+      padding:"16px"}}
       onClick={onClose}>
-      <div style={{position:"relative",maxWidth:500,width:"95%",textAlign:"center"}}
+      <div style={{position:"relative",maxWidth:500,width:"100%",textAlign:"center",
+        maxHeight:"calc(100vh - 32px)",display:"flex",flexDirection:"column"}}
         onClick={e=>e.stopPropagation()}>
         {/* title */}
-        <div style={{color:"white",fontSize:20,fontWeight:900,marginBottom:12}}>
+        <div style={{color:"white",fontSize:18,fontWeight:900,marginBottom:8,flexShrink:0}}>
           {title} ({idx+1}/{images.length})
         </div>
         {/* image */}
         <div onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}
-          style={{borderRadius:16,overflow:"hidden",background:"white",minHeight:200,
-            display:"flex",alignItems:"center",justifyContent:"center"}}>
+          style={{borderRadius:16,overflow:"auto",background:"white",
+            flex:1,minHeight:0,display:"flex",alignItems:"center",justifyContent:"center",
+            WebkitOverflowScrolling:"touch"}}>
           <img src={images[idx]} alt={`${title} ${idx+1}`}
-            style={{width:"100%",display:"block"}}/>
+            style={{width:"100%",maxHeight:"65vh",objectFit:"contain",display:"block"}}/>
         </div>
         {/* nav buttons */}
         {images.length > 1 && (
@@ -1034,12 +1037,6 @@ function ListeningBoard({ checks, toggle, links }) {
             <span style={{fontSize:36}}>{s.emoji}</span>
             <h2 style={{fontSize:20,fontWeight:900,color:s.color}}>{s.label}</h2>
           </div>
-          <button className="bb" onClick={()=>setViewImages({title:`${s.emoji} ${s.label} 듣기 내용`,images:listenImgs[s.key]})}
-            style={{width:"100%",padding:"10px",marginBottom:8,borderRadius:12,
-              background:`linear-gradient(135deg,${s.color},${s.color}cc)`,color:"white",
-              fontSize:14,fontWeight:800,boxShadow:`0 3px 10px ${s.color}4d`}}>
-            📸 이번 달 듣기 내용 보기
-          </button>
           <p style={{textAlign:"center",fontWeight:700,color:"#999",fontSize:13,marginBottom:10}}>
             🎧 3번씩 듣고 따라하세요
           </p>
@@ -1047,6 +1044,12 @@ function ListeningBoard({ checks, toggle, links }) {
           <div style={{marginTop:16}}>
             <AudioBtn url={links[s.key]} color={s.color} label={s.label}/>
           </div>
+          <button className="bb" onClick={()=>setViewImages({title:`${s.emoji} ${s.label} 듣기 내용`,images:listenImgs[s.key]})}
+            style={{width:"100%",padding:"10px",marginTop:10,marginBottom:8,borderRadius:12,
+              background:`linear-gradient(135deg,${s.color},${s.color}cc)`,color:"white",
+              fontSize:14,fontWeight:800,boxShadow:`0 3px 10px ${s.color}4d`}}>
+            📸 이번 달 듣기 내용 보기
+          </button>
         </div>
       )})}
     </div>
@@ -1091,12 +1094,6 @@ function ComprehensiveBoard({ checks, toggle, links }) {
 
       <Card color="#E88A8A" idx={1} bg="linear-gradient(to bottom, #FFFFFF, #FFF8F8, #FFF0F0, #FFE8E8)">
         <Sec num="2" emoji="📕" title="Wonders" color="#E88A8A"/>
-        <button className="bb" onClick={()=>setViewImages({title:"📕 Wonders 듣기 내용",images:WONDERS_LISTEN_IMG})}
-          style={{width:"100%",padding:"10px",marginBottom:8,borderRadius:12,
-            background:"linear-gradient(135deg,#E88A8A,#D47070)",color:"white",
-            fontSize:14,fontWeight:800,boxShadow:"0 3px 10px rgba(232,138,138,.3)"}}>
-          📸 이번 달 듣기 내용 보기
-        </button>
         <p style={{textAlign:"center",fontWeight:700,color:"#999",fontSize:13,marginBottom:12}}>
           🎧 3번씩 듣고 따라하세요
         </p>
@@ -1104,6 +1101,12 @@ function ComprehensiveBoard({ checks, toggle, links }) {
         <div style={{marginTop:16}}>
           <AudioBtn url={links.wonders} color="#E88A8A" label="Wonders"/>
         </div>
+        <button className="bb" onClick={()=>setViewImages({title:"📕 Wonders 듣기 내용",images:WONDERS_LISTEN_IMG})}
+          style={{width:"100%",padding:"10px",marginTop:10,marginBottom:8,borderRadius:12,
+            background:"linear-gradient(135deg,#E88A8A,#D47070)",color:"white",
+            fontSize:14,fontWeight:800,boxShadow:"0 3px 10px rgba(232,138,138,.3)"}}>
+          📸 이번 달 듣기 내용 보기
+        </button>
         <Div color="#E88A8A"/>
         <SubSec num="2-1" label="Home Workbook" color="#E88A8A"/>
         <OptRow label="Wonders Homework Book 해당 page를 하세요"
@@ -1112,12 +1115,6 @@ function ComprehensiveBoard({ checks, toggle, links }) {
 
       <Card color="#6BC5A0" idx={2} bg="linear-gradient(to bottom, #FFFFFF, #F6FDF9, #EDFAF3, #E0F8EE)">
         <Sec num="3" emoji="📗" title="Bricks Reading" color="#6BC5A0"/>
-        <button className="bb" onClick={()=>setViewImages({title:"📗 Bricks Reading 듣기 내용",images:BRICKS_LISTEN_IMG})}
-          style={{width:"100%",padding:"10px",marginBottom:8,borderRadius:12,
-            background:"linear-gradient(135deg,#6BC5A0,#52B088)",color:"white",
-            fontSize:14,fontWeight:800,boxShadow:"0 3px 10px rgba(107,197,160,.3)"}}>
-          📸 이번 달 듣기 내용 보기
-        </button>
         <p style={{textAlign:"center",fontWeight:700,color:"#999",fontSize:13,marginBottom:12}}>
           🎧 3번씩 듣고 따라하세요
         </p>
@@ -1125,6 +1122,12 @@ function ComprehensiveBoard({ checks, toggle, links }) {
         <div style={{marginTop:16}}>
           <AudioBtn url={links.bricks} color="#6BC5A0" label="Bricks Reading"/>
         </div>
+        <button className="bb" onClick={()=>setViewImages({title:"📗 Bricks Reading 듣기 내용",images:BRICKS_LISTEN_IMG})}
+          style={{width:"100%",padding:"10px",marginTop:10,marginBottom:8,borderRadius:12,
+            background:"linear-gradient(135deg,#6BC5A0,#52B088)",color:"white",
+            fontSize:14,fontWeight:800,boxShadow:"0 3px 10px rgba(107,197,160,.3)"}}>
+          📸 이번 달 듣기 내용 보기
+        </button>
         <Div color="#6BC5A0"/>
         <SubSec num="3-1" label="Workbook" color="#6BC5A0"/>
         <OptRow label="Bricks Reading Workbook 해당 Unit을 하세요"
@@ -1136,12 +1139,6 @@ function ComprehensiveBoard({ checks, toggle, links }) {
 
       <Card color="#7BAFD4" idx={3} bg="linear-gradient(to bottom, #FFFFFF, #F5FAFD, #EDF5FB, #E0F0FF)">
         <Sec num="4" emoji="📘" title="Come On Phonics" color="#7BAFD4"/>
-        <button className="bb" onClick={()=>setViewImages({title:"📘 Come On Phonics 듣기 내용",images:COMEON_LISTEN_IMG})}
-          style={{width:"100%",padding:"10px",marginBottom:8,borderRadius:12,
-            background:"linear-gradient(135deg,#7BAFD4,#6199BE)",color:"white",
-            fontSize:14,fontWeight:800,boxShadow:"0 3px 10px rgba(123,175,212,.3)"}}>
-          📸 이번 달 듣기 내용 보기
-        </button>
         <p style={{textAlign:"center",fontWeight:700,color:"#999",fontSize:13,marginBottom:12}}>
           🎧 3번씩 듣고 따라하세요
         </p>
@@ -1149,6 +1146,12 @@ function ComprehensiveBoard({ checks, toggle, links }) {
         <div style={{marginTop:16}}>
           <AudioBtn url={links.comeon} color="#7BAFD4" label="Come On Phonics"/>
         </div>
+        <button className="bb" onClick={()=>setViewImages({title:"📘 Come On Phonics 듣기 내용",images:COMEON_LISTEN_IMG})}
+          style={{width:"100%",padding:"10px",marginTop:10,marginBottom:8,borderRadius:12,
+            background:"linear-gradient(135deg,#7BAFD4,#6199BE)",color:"white",
+            fontSize:14,fontWeight:800,boxShadow:"0 3px 10px rgba(123,175,212,.3)"}}>
+          📸 이번 달 듣기 내용 보기
+        </button>
         <Div color="#7BAFD4"/>
         <SubSec num="4-1" label="Workbook" color="#7BAFD4"/>
         <OptRow label="Come On Phonics Workbook 해당 page를 하세요"
