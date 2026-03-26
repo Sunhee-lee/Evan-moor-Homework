@@ -258,7 +258,7 @@ function ImageViewer({ title, images, onClose }) {
         onClick={e=>e.stopPropagation()}>
         {/* title */}
         <div style={{color:"white",fontSize:18,fontWeight:900,marginBottom:8,flexShrink:0}}>
-          {title} - {(()=>{const d=new Date();return `${d.getMonth()+1}월 ${d.getDate()}일 (${["일","월","화","수","목","금","토"][d.getDay()]})`})()} ({idx+1}/{images.length})
+          {title} - {(()=>{const d=new Date();return `${d.getMonth()+1}월 ${d.getDate()}일 (${["일","월","화","수","목","금","토"][d.getDay()]})`})()}{images.length>1?` (${idx+1}/${images.length})`:""}
         </div>
         {/* image */}
         <div onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}
