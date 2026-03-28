@@ -1451,7 +1451,11 @@ function App() {
     setDayMode([1,3,5].includes(d)?"comprehensive":"listening");
   },[]);
 
-  const saveName = useCallback((n)=>{ setName(n); ls.set("hw_name",n); },[]);
+  const SHEET_URL = "https://script.google.com/macros/s/AKfycbyNAU6uau6C0ZdNGZYycypxTce7l-NIhviihcwCh1xd4LV7q8U6es2SIiAatwY1J49W6w/exec";
+  const saveName = useCallback((n)=>{
+    setName(n); ls.set("hw_name",n);
+    new Image().src=`${SHEET_URL}?name=${encodeURIComponent(n)}&action=register&t=${Date.now()}`;
+  },[]);
 
   const items = useMemo(()=>getItems(dayMode),[dayMode]);
   const progress = useMemo(()=>countProgress(items,checks),[items,checks]);
