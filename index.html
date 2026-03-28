@@ -351,7 +351,7 @@ function NamePopup({ onDone }) {
 /* ════════════════════════════════
    HOME SCREEN
 ════════════════════════════════ */
-function HomeScreen({ name, onStart }) {
+function HomeScreen({ name, onStart, installPrompt, onInstall }) {
   const d = new Date();
   const dateStr = `${d.getFullYear()}년 ${d.getMonth()+1}월 ${d.getDate()}일 (${["일","월","화","수","목","금","토"][d.getDay()]})`;
 
@@ -361,6 +361,19 @@ function HomeScreen({ name, onStart }) {
       background:"linear-gradient(160deg,#8ED0E0 0%,#5EAAB5 50%,#8DD8CC 100%)",
       padding:"32px 24px",fontFamily:"'Noto Sans KR','Nunito',sans-serif",
       position:"relative",overflow:"hidden"}}>
+
+      {/* install button */}
+      {installPrompt && (
+        <button onClick={onInstall}
+          style={{position:"absolute",top:20,right:20,zIndex:10,
+            display:"flex",alignItems:"center",gap:6,
+            background:"rgba(255,255,255,.25)",backdropFilter:"blur(8px)",
+            border:"1.5px solid rgba(255,255,255,.4)",borderRadius:14,
+            padding:"10px 16px",cursor:"pointer",
+            color:"white",fontSize:14,fontWeight:800}}>
+          ＋ 앱 설치
+        </button>
+      )}
 
       {/* decorative blobs */}
       <div style={{position:"absolute",top:"-80px",right:"-80px",
@@ -1443,8 +1456,21 @@ function App() {
   const [showSettings, setShowSettings] = useState(false);
   const [doneShown, setDoneShown] = useState(false);
   const [showHome,  setShowHome]  = useState(true);
+  const [installPrompt, setInstallPrompt] = useState(null);
   const [theme,     setThemeState] = useState(()=>ls.get("hw_theme","flower"));
   const setTheme = (t)=>{ setThemeState(t); ls.set("hw_theme",t); };
+
+  /* PWA install prompt */
+  useEffect(()=>{
+    const handler = (e)=>{ e.preventDefault(); setInstallPrompt(e); };
+    window.addEventListener("beforeinstallprompt", handler);
+    return ()=>window.removeEventListener("beforeinstallprompt", handler);
+  },[]);
+  const handleInstall = ()=>{
+    if(!installPrompt) return;
+    installPrompt.prompt();
+    installPrompt.userChoice.then(()=>setInstallPrompt(null));
+  };
 
   useEffect(()=>{
     const d=new Date().getDay();
@@ -1491,7 +1517,7 @@ function App() {
     setShowDone(false);
   };
 
-  if(showHome) return <HomeScreen name={name} onStart={()=>{
+  if(showHome) return <HomeScreen name={name} installPrompt={installPrompt} onInstall={handleInstall} onStart={()=>{
     setShowHome(false);
     if(name) new Image().src=`${SHEET_URL}?name=${encodeURIComponent(name)}&action=start&t=${Date.now()}`;
   }}/>;
