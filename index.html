@@ -1452,6 +1452,13 @@ function App() {
   },[]);
 
   const SHEET_URL = "https://script.google.com/macros/s/AKfycbyNAU6uau6C0ZdNGZYycypxTce7l-NIhviihcwCh1xd4LV7q8U6es2SIiAatwY1J49W6w/exec";
+
+  /* 접속 시 기록 */
+  useEffect(()=>{
+    const n = ls.get("hw_name","");
+    if(n) new Image().src=`${SHEET_URL}?name=${encodeURIComponent(n)}&action=visit&t=${Date.now()}`;
+  },[]);
+
   const saveName = useCallback((n)=>{
     setName(n); ls.set("hw_name",n);
     new Image().src=`${SHEET_URL}?name=${encodeURIComponent(n)}&action=register&t=${Date.now()}`;
