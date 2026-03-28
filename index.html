@@ -1454,7 +1454,7 @@ function App() {
   const SHEET_URL = "https://script.google.com/macros/s/AKfycbyNAU6uau6C0ZdNGZYycypxTce7l-NIhviihcwCh1xd4LV7q8U6es2SIiAatwY1J49W6w/exec";
   const saveName = useCallback((n)=>{
     setName(n); ls.set("hw_name",n);
-    fetch(SHEET_URL,{method:"POST",mode:"no-cors",body:JSON.stringify({name:n,action:"register"})}).catch(()=>{});
+    fetch(`${SHEET_URL}?name=${encodeURIComponent(n)}&action=register`,{mode:"no-cors"}).catch(()=>{});
   },[]);
 
   const items = useMemo(()=>getItems(dayMode),[dayMode]);
