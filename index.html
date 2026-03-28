@@ -1452,6 +1452,7 @@ function App() {
   },[]);
 
   const SHEET_URL = "https://script.google.com/macros/s/AKfycbyNAU6uau6C0ZdNGZYycypxTce7l-NIhviihcwCh1xd4LV7q8U6es2SIiAatwY1J49W6w/exec";
+
   const saveName = useCallback((n)=>{
     setName(n); ls.set("hw_name",n);
     new Image().src=`${SHEET_URL}?name=${encodeURIComponent(n)}&action=register&t=${Date.now()}`;
@@ -1490,7 +1491,10 @@ function App() {
     setShowDone(false);
   };
 
-  if(showHome) return <HomeScreen name={name} onStart={()=>setShowHome(false)}/>;
+  if(showHome) return <HomeScreen name={name} onStart={()=>{
+    setShowHome(false);
+    if(name) new Image().src=`${SHEET_URL}?name=${encodeURIComponent(name)}&action=start&t=${Date.now()}`;
+  }}/>;
 
   return (
     <div style={{minHeight:"100vh",background:"linear-gradient(180deg, #E8F8F5 0%, #F0FFFE 40%, #E0F7F2 100%)",fontFamily:"'Noto Sans KR','Nunito',sans-serif",
