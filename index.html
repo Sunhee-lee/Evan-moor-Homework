@@ -218,7 +218,7 @@ function DonePopup({ name, onClose, theme }) {
 /* ════════════════════════════════
    IMAGE VIEWER  (단어 / 영어전달 사진 보기)
 ════════════════════════════════ */
-const IMG_VER = "v2";
+const IMG_VER = new Date().toISOString().slice(0,10);
 const VOCAB_IMAGES = [
   `https://drive.google.com/thumbnail?id=13hZLty3VgiodTyTYgLM-Ydp1qx97tEKV&sz=w1600&${IMG_VER}`,
   `https://drive.google.com/thumbnail?id=1F3uD_jcxLqPRaXvayYjk93ZHiPYLY8zA&sz=w1600&${IMG_VER}`,
