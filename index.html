@@ -218,20 +218,21 @@ function DonePopup({ name, onClose, theme }) {
 /* ════════════════════════════════
    IMAGE VIEWER  (단어 / 영어전달 사진 보기)
 ════════════════════════════════ */
+const IMG_VER = "v2";
 const VOCAB_IMAGES = [
-  "https://drive.google.com/thumbnail?id=13hZLty3VgiodTyTYgLM-Ydp1qx97tEKV&sz=w1600",
-  "https://drive.google.com/thumbnail?id=1F3uD_jcxLqPRaXvayYjk93ZHiPYLY8zA&sz=w1600",
-  "https://drive.google.com/thumbnail?id=1ugs4QfJetm-CnxWqNH15_0Y--AycUkup&sz=w1600",
-  "https://drive.google.com/thumbnail?id=1V3Ds5fdn4y_XFTxN5N18opvClIeb7-Tg&sz=w1600",
-  "https://drive.google.com/thumbnail?id=1Sz8AxyFr6z5EVCgjkuF9QohsgD8NMJeq&sz=w1600",
+  `https://drive.google.com/thumbnail?id=13hZLty3VgiodTyTYgLM-Ydp1qx97tEKV&sz=w1600&${IMG_VER}`,
+  `https://drive.google.com/thumbnail?id=1F3uD_jcxLqPRaXvayYjk93ZHiPYLY8zA&sz=w1600&${IMG_VER}`,
+  `https://drive.google.com/thumbnail?id=1ugs4QfJetm-CnxWqNH15_0Y--AycUkup&sz=w1600&${IMG_VER}`,
+  `https://drive.google.com/thumbnail?id=1V3Ds5fdn4y_XFTxN5N18opvClIeb7-Tg&sz=w1600&${IMG_VER}`,
+  `https://drive.google.com/thumbnail?id=1Sz8AxyFr6z5EVCgjkuF9QohsgD8NMJeq&sz=w1600&${IMG_VER}`,
 ];
 const JUNDAL_IMAGES = [
-  "https://drive.google.com/thumbnail?id=10gDexBvm6YdS5oQ1xNLpyBzu1ZFqXGVx&sz=w1600",
-  "https://drive.google.com/thumbnail?id=1TFB3_aARZXCxbWesKQuOfif0eV7XCqWi&sz=w1600",
+  `https://drive.google.com/thumbnail?id=10gDexBvm6YdS5oQ1xNLpyBzu1ZFqXGVx&sz=w1600&${IMG_VER}`,
+  `https://drive.google.com/thumbnail?id=1TFB3_aARZXCxbWesKQuOfif0eV7XCqWi&sz=w1600&${IMG_VER}`,
 ];
-const WONDERS_LISTEN_IMG = ["https://drive.google.com/thumbnail?id=1s8ZJLp0rdfdLpZZo3dqFP8sw00GoFwOA&sz=w1600"];
-const BRICKS_LISTEN_IMG = ["https://drive.google.com/thumbnail?id=1cabPy3zTHLSPdtZ2aky-y6Mml1PJtYBq&sz=w1600"];
-const COMEON_LISTEN_IMG = ["https://drive.google.com/thumbnail?id=1sSF3GzKopwPubGIA2qt-a5d5T8wLHPhm&sz=w1600"];
+const WONDERS_LISTEN_IMG = [`https://drive.google.com/thumbnail?id=1s8ZJLp0rdfdLpZZo3dqFP8sw00GoFwOA&sz=w1600&${IMG_VER}`];
+const BRICKS_LISTEN_IMG = [`https://drive.google.com/thumbnail?id=1cabPy3zTHLSPdtZ2aky-y6Mml1PJtYBq&sz=w1600&${IMG_VER}`];
+const COMEON_LISTEN_IMG = [`https://drive.google.com/thumbnail?id=1sSF3GzKopwPubGIA2qt-a5d5T8wLHPhm&sz=w1600&${IMG_VER}`];
 
 function ImageViewer({ title, images, onClose }) {
   const [idx, setIdx] = useState(0);
