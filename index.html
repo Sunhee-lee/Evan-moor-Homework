@@ -839,12 +839,128 @@ function HouseSVG({ pct }) {
   );
 }
 
+/* ════════════════════════════════
+   EGG HATCH SVG  (알 → 병아리 → 닭)
+════════════════════════════════ */
+function EggSVG({ pct }) {
+  // 0=egg, 1-25=crack, 26-50=hatching, 51-75=chick, 76-99=growing, 100=chicken
+  const stage = pct===0?0 : pct<=25?1 : pct<=50?2 : pct<=75?3 : pct<100?4 : 5;
+  return (
+    <svg width={80} height={90} viewBox="0 0 80 90" style={{overflow:"visible"}}>
+      {/* nest */}
+      <ellipse cx={40} cy={78} rx={30} ry={8} fill="#C8956C" opacity={.7}/>
+      <path d="M12 76 Q18 68 28 72 Q34 66 40 70 Q46 66 52 72 Q62 68 68 76" fill="#A0725A" opacity={.6}/>
+      <path d="M15 78 Q22 72 30 75 Q36 70 42 74 Q48 70 55 75 Q62 72 65 78" fill="#8B6914" opacity={.5}/>
+
+      {/* stage 0: full egg */}
+      {stage===0 && (
+        <ellipse cx={40} cy={56} rx={16} ry={22} fill="#FFF5E6" stroke="#E8D5B8" strokeWidth={1.5}/>
+      )}
+
+      {/* stage 1: cracking egg */}
+      {stage===1 && (<>
+        <ellipse cx={40} cy={56} rx={16} ry={22} fill="#FFF5E6" stroke="#E8D5B8" strokeWidth={1.5}/>
+        <path d="M32 52 L36 58 L34 50 L38 56 L36 48 L40 54 L42 46 L44 54 L46 48 L44 56 L48 52"
+          stroke="#C8A882" strokeWidth={1.5} fill="none" strokeLinecap="round"/>
+      </>)}
+
+      {/* stage 2: hatching - shell breaking */}
+      {stage===2 && (<>
+        {/* bottom shell */}
+        <path d="M24 58 Q26 72 40 74 Q54 72 56 58 L52 54 L48 60 L44 52 L40 58 L36 52 L32 60 L28 54 Z"
+          fill="#FFF5E6" stroke="#E8D5B8" strokeWidth={1}/>
+        {/* top shell piece */}
+        <path d="M28 50 Q30 38 40 35 Q50 38 52 50 L48 54 L44 48 L40 52 L36 48 L32 54 Z"
+          fill="#FFF5E6" stroke="#E8D5B8" strokeWidth={1}
+          transform="translate(-8,-6) rotate(-15 40 45)"/>
+        {/* tiny eyes peeking */}
+        <circle cx={36} cy={54} r={2} fill="#333"/>
+        <circle cx={44} cy={54} r={2} fill="#333"/>
+      </>)}
+
+      {/* stage 3: baby chick */}
+      {stage===3 && (<>
+        {/* body */}
+        <ellipse cx={40} cy={62} rx={14} ry={12} fill="#FFD93D"/>
+        {/* head */}
+        <circle cx={40} cy={46} r={11} fill="#FFD93D"/>
+        {/* eyes */}
+        <circle cx={36} cy={44} r={2.5} fill="white"/>
+        <circle cx={44} cy={44} r={2.5} fill="white"/>
+        <circle cx={36.5} cy={44.5} r={1.2} fill="#333"/>
+        <circle cx={44.5} cy={44.5} r={1.2} fill="#333"/>
+        {/* beak */}
+        <path d="M38 48 L40 52 L42 48" fill="#FF9800"/>
+        {/* tiny wings */}
+        <ellipse cx={27} cy={60} rx={5} ry={3} fill="#FFC107" transform="rotate(-20 27 60)"/>
+        <ellipse cx={53} cy={60} rx={5} ry={3} fill="#FFC107" transform="rotate(20 53 60)"/>
+        {/* shell piece on head */}
+        <path d="M32 40 L35 32 L38 38 L41 30 L44 38 L47 32 L48 40" fill="#FFF5E6" stroke="#E8D5B8" strokeWidth={.8}/>
+      </>)}
+
+      {/* stage 4: growing chick */}
+      {stage===4 && (<>
+        {/* body */}
+        <ellipse cx={40} cy={62} rx={15} ry={13} fill="#FFD93D"/>
+        {/* head */}
+        <circle cx={40} cy={44} r={12} fill="#FFD93D"/>
+        {/* eyes */}
+        <circle cx={35} cy={42} r={2.5} fill="white"/>
+        <circle cx={45} cy={42} r={2.5} fill="white"/>
+        <circle cx={35.5} cy={42.5} r={1.2} fill="#333"/>
+        <circle cx={45.5} cy={42.5} r={1.2} fill="#333"/>
+        {/* beak */}
+        <path d="M37 47 L40 52 L43 47" fill="#FF9800"/>
+        {/* wings */}
+        <ellipse cx={25} cy={58} rx={7} ry={4} fill="#FFC107" transform="rotate(-15 25 58)"/>
+        <ellipse cx={55} cy={58} rx={7} ry={4} fill="#FFC107" transform="rotate(15 55 58)"/>
+        {/* comb */}
+        <path d="M36 33 Q38 28 40 33 Q42 28 44 33" fill="#FF5252"/>
+        {/* feet */}
+        <path d="M34 74 L30 80 M34 74 L34 80 M34 74 L38 80" stroke="#FF9800" strokeWidth={1.5} fill="none"/>
+        <path d="M46 74 L42 80 M46 74 L46 80 M46 74 L50 80" stroke="#FF9800" strokeWidth={1.5} fill="none"/>
+      </>)}
+
+      {/* stage 5: full chicken (100%) */}
+      {stage===5 && (<>
+        {/* body */}
+        <ellipse cx={40} cy={60} rx={17} ry={15} fill="#FFD93D"/>
+        {/* head */}
+        <circle cx={40} cy={40} r={13} fill="#FFD93D"/>
+        {/* eyes - happy */}
+        <path d="M33 38 Q35 35 37 38" stroke="#333" strokeWidth={2} fill="none" strokeLinecap="round"/>
+        <path d="M43 38 Q45 35 47 38" stroke="#333" strokeWidth={2} fill="none" strokeLinecap="round"/>
+        {/* blush */}
+        <circle cx={30} cy={42} r={3} fill="#FFAB91" opacity={.5}/>
+        <circle cx={50} cy={42} r={3} fill="#FFAB91" opacity={.5}/>
+        {/* beak */}
+        <path d="M37 44 L40 49 L43 44" fill="#FF9800"/>
+        {/* comb */}
+        <path d="M34 28 Q36 22 38 28 Q40 22 42 28 Q44 22 46 28" fill="#FF5252"/>
+        {/* wings */}
+        <ellipse cx={23} cy={56} rx={8} ry={5} fill="#FFC107" transform="rotate(-10 23 56)"/>
+        <ellipse cx={57} cy={56} rx={8} ry={5} fill="#FFC107" transform="rotate(10 57 56)"/>
+        {/* tail */}
+        <path d="M56 50 Q65 42 62 50 Q68 44 64 52" fill="#FFC107"/>
+        {/* feet */}
+        <path d="M34 74 L30 82 M34 74 L34 82 M34 74 L38 82" stroke="#FF9800" strokeWidth={2} fill="none"/>
+        <path d="M46 74 L42 82 M46 74 L46 82 M46 74 L50 82" stroke="#FF9800" strokeWidth={2} fill="none"/>
+        {/* sparkles */}
+        {[[15,14],[65,10],[70,36],[12,46],[45,6]].map(([sx,sy],i)=>(
+          <text key={i} x={sx} y={sy} fontSize={10} textAnchor="middle" opacity={.85}>✨</text>
+        ))}
+      </>)}
+    </svg>
+  );
+}
+
 /* ── theme registry ── */
 const THEMES = {
   flower:    { label:"꽃",      icon:"🌸", Component: PlantSVG },
   dino:      { label:"공룡",    icon:"🦕", Component: DinoSVG },
   butterfly: { label:"나비",    icon:"🦋", Component: ButterflySVG },
   house:     { label:"집짓기",  icon:"🏠", Component: HouseSVG },
+  egg:       { label:"알 부화", icon:"🥚", Component: EggSVG },
 };
 
 /* ════════════════════════════════
