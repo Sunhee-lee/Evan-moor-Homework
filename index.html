@@ -954,6 +954,253 @@ function EggSVG({ pct }) {
   );
 }
 
+/* ════════════════════════════════
+   MOON SVG  (초승달 → 보름달)
+════════════════════════════════ */
+function MoonSVG({ pct }) {
+  const stage = pct===0?0 : pct<=20?1 : pct<=40?2 : pct<=60?3 : pct<=80?4 : pct<100?5 : 6;
+  const glow = stage>=4 ? Math.min(1,(stage-3)/3) : 0;
+  return (
+    <svg width={80} height={90} viewBox="0 0 80 90" style={{overflow:"visible"}}>
+      {/* sky bg */}
+      <rect x={0} y={0} width={80} height={90} rx={12} fill={`rgba(25,25,80,${0.15+stage*0.08})`}/>
+
+      {/* glow */}
+      {glow>0 && <circle cx={40} cy={42} r={32} fill="#FFF9C4" opacity={glow*0.25}/>}
+      {glow>0 && <circle cx={40} cy={42} r={26} fill="#FFF9C4" opacity={glow*0.15}/>}
+
+      {/* stage 0: nothing - dark sky */}
+      {stage===0 && (
+        <circle cx={40} cy={42} r={20} fill="#334" opacity={.5}/>
+      )}
+
+      {/* stage 1: crescent */}
+      {stage===1 && (<>
+        <circle cx={40} cy={42} r={20} fill="#FFF9C4"/>
+        <circle cx={50} cy={38} r={18} fill="rgba(25,25,80,0.23)"/>
+      </>)}
+
+      {/* stage 2: waxing crescent */}
+      {stage===2 && (<>
+        <circle cx={40} cy={42} r={20} fill="#FFF9C4"/>
+        <circle cx={48} cy={40} r={16} fill="rgba(25,25,80,0.23)"/>
+      </>)}
+
+      {/* stage 3: first quarter */}
+      {stage===3 && (<>
+        <circle cx={40} cy={42} r={20} fill="#FFF9C4"/>
+        <rect x={40} y={22} width={20} height={40} fill="rgba(25,25,80,0.23)"/>
+      </>)}
+
+      {/* stage 4: waxing gibbous */}
+      {stage===4 && (<>
+        <circle cx={40} cy={42} r={20} fill="#FFECB3"/>
+        <circle cx={34} cy={42} r={12} fill="rgba(25,25,80,0.15)"/>
+      </>)}
+
+      {/* stage 5: almost full */}
+      {stage===5 && (<>
+        <circle cx={40} cy={42} r={20} fill="#FFE082"/>
+        <circle cx={36} cy={42} r={6} fill="rgba(25,25,80,0.08)"/>
+      </>)}
+
+      {/* stage 6: full moon */}
+      {stage===6 && (<>
+        <circle cx={40} cy={42} r={22} fill="#FFD54F"/>
+        {/* face */}
+        <path d="M33 38 Q35 35 37 38" stroke="#BF8F00" strokeWidth={1.5} fill="none" strokeLinecap="round"/>
+        <path d="M43 38 Q45 35 47 38" stroke="#BF8F00" strokeWidth={1.5} fill="none" strokeLinecap="round"/>
+        <path d="M35 48 Q40 52 45 48" stroke="#BF8F00" strokeWidth={1.5} fill="none" strokeLinecap="round"/>
+        {/* sparkles */}
+        {[[12,14],[68,12],[70,42],[10,50],[50,8]].map(([sx,sy],i)=>(
+          <text key={i} x={sx} y={sy} fontSize={10} textAnchor="middle" opacity={.85}>✨</text>
+        ))}
+      </>)}
+
+      {/* stars */}
+      {stage>=1 && [[15,18],[65,15],[18,70],[62,72],[50,80]].slice(0,Math.min(5,stage+1)).map(([sx,sy],i)=>(
+        <text key={i} x={sx} y={sy} fontSize={7} textAnchor="middle" opacity={.6}>⭐</text>
+      ))}
+    </svg>
+  );
+}
+
+/* ════════════════════════════════
+   SEA CREATURE SVG  (물방울 → 고래)
+════════════════════════════════ */
+function SeaSVG({ pct }) {
+  const stage = pct===0?0 : pct<=20?1 : pct<=40?2 : pct<=65?3 : pct<100?4 : 5;
+  return (
+    <svg width={80} height={90} viewBox="0 0 80 90" style={{overflow:"visible"}}>
+      {/* water bg */}
+      <rect x={0} y={40} width={80} height={50} rx={8} fill="#E3F2FD" opacity={.5}/>
+      <path d="M0 45 Q10 40 20 45 Q30 50 40 45 Q50 40 60 45 Q70 50 80 45 L80 90 L0 90Z" fill="#BBDEFB" opacity={.3}/>
+
+      {/* stage 0: water drop */}
+      {stage===0 && (
+        <path d="M40 30 Q40 30 48 50 Q48 58 40 58 Q32 58 32 50 Z" fill="#90CAF9" opacity={.7}/>
+      )}
+
+      {/* stage 1: small fish */}
+      {stage===1 && (<>
+        <ellipse cx={40} cy={52} rx={12} ry={7} fill="#FF8A65"/>
+        <path d="M52 52 L60 44 L60 60 Z" fill="#FF8A65"/>
+        <circle cx={34} cy={50} r={2} fill="white"/>
+        <circle cx={34.5} cy={50.5} r={1} fill="#333"/>
+        <ellipse cx={40} cy={48} rx={4} ry={2} fill="#FFAB91" opacity={.6}/>
+      </>)}
+
+      {/* stage 2: bigger fish */}
+      {stage===2 && (<>
+        <ellipse cx={40} cy={50} rx={16} ry={10} fill="#4FC3F7"/>
+        <path d="M56 50 L66 40 L66 60 Z" fill="#4FC3F7"/>
+        <circle cx={32} cy={47} r={3} fill="white"/>
+        <circle cx={32.5} cy={47.5} r={1.5} fill="#333"/>
+        <ellipse cx={40} cy={45} rx={6} ry={2.5} fill="#81D4FA" opacity={.6}/>
+        <path d="M38 42 L40 36 L42 42" fill="#4FC3F7"/>
+        {/* bubbles */}
+        <circle cx={26} cy={40} r={2} fill="#E3F2FD" opacity={.7}/>
+        <circle cx={22} cy={34} r={1.5} fill="#E3F2FD" opacity={.5}/>
+      </>)}
+
+      {/* stage 3: dolphin */}
+      {stage===3 && (<>
+        <path d="M18 52 Q24 36 40 38 Q56 36 62 48 Q58 56 40 56 Q22 56 18 52Z" fill="#5C6BC0"/>
+        <path d="M58 44 Q64 34 68 40 Q64 42 62 48" fill="#5C6BC0"/>
+        <circle cx={28} cy={46} r={2.5} fill="white"/>
+        <circle cx={28.5} cy={46.5} r={1.2} fill="#333"/>
+        <path d="M20 50 Q24 52 20 54" fill="#7986CB"/>
+        <path d="M40 38 Q42 30 46 34" fill="#5C6BC0"/>
+        {/* bubbles */}
+        <circle cx={16} cy={42} r={2} fill="#E3F2FD" opacity={.6}/>
+        <circle cx={12} cy={36} r={1.5} fill="#E3F2FD" opacity={.4}/>
+        <circle cx={18} cy={34} r={1} fill="#E3F2FD" opacity={.5}/>
+      </>)}
+
+      {/* stage 4: small whale */}
+      {stage===4 && (<>
+        <ellipse cx={40} cy={52} rx={22} ry={14} fill="#42A5F5"/>
+        <ellipse cx={40} cy={58} rx={16} ry={6} fill="#90CAF9" opacity={.5}/>
+        <path d="M62 48 Q70 36 72 46 Q68 50 62 52" fill="#42A5F5"/>
+        <circle cx={30} cy={48} r={3} fill="white"/>
+        <circle cx={30.5} cy={48.5} r={1.5} fill="#333"/>
+        <path d="M22 54 Q26 58 22 58" fill="#64B5F6"/>
+        {/* water spout */}
+        <path d="M38 38 Q36 28 32 24" stroke="#90CAF9" strokeWidth={2} fill="none" strokeLinecap="round"/>
+        <path d="M38 38 Q40 28 42 24" stroke="#90CAF9" strokeWidth={2} fill="none" strokeLinecap="round"/>
+        <circle cx={32} cy={22} r={2} fill="#BBDEFB" opacity={.6}/>
+        <circle cx={42} cy={22} r={2} fill="#BBDEFB" opacity={.6}/>
+      </>)}
+
+      {/* stage 5: big whale (100%) */}
+      {stage===5 && (<>
+        <ellipse cx={40} cy={52} rx={26} ry={16} fill="#1E88E5"/>
+        <ellipse cx={40} cy={60} rx={20} ry={8} fill="#64B5F6" opacity={.5}/>
+        <path d="M66 46 Q74 32 76 44 Q72 50 66 52" fill="#1E88E5"/>
+        {/* happy eyes */}
+        <path d="M28 46 Q30 43 32 46" stroke="white" strokeWidth={2} fill="none" strokeLinecap="round"/>
+        <path d="M38 46 Q40 43 42 46" stroke="white" strokeWidth={2} fill="none" strokeLinecap="round"/>
+        <path d="M18 56 Q24 60 18 60" fill="#42A5F5"/>
+        {/* big water spout */}
+        <path d="M36 36 Q32 22 26 16" stroke="#90CAF9" strokeWidth={2.5} fill="none" strokeLinecap="round"/>
+        <path d="M38 36 Q40 20 42 14" stroke="#90CAF9" strokeWidth={2.5} fill="none" strokeLinecap="round"/>
+        <path d="M40 36 Q46 22 52 16" stroke="#90CAF9" strokeWidth={2.5} fill="none" strokeLinecap="round"/>
+        <circle cx={26} cy={14} r={2.5} fill="#BBDEFB" opacity={.7}/>
+        <circle cx={42} cy={12} r={2.5} fill="#BBDEFB" opacity={.7}/>
+        <circle cx={52} cy={14} r={2.5} fill="#BBDEFB" opacity={.7}/>
+        {/* sparkles */}
+        {[[8,20],[72,18],[74,50],[6,60],[48,6]].map(([sx,sy],i)=>(
+          <text key={i} x={sx} y={sy} fontSize={10} textAnchor="middle" opacity={.85}>✨</text>
+        ))}
+      </>)}
+    </svg>
+  );
+}
+
+/* ════════════════════════════════
+   GEM MINING SVG  (돌 → 왕관)
+════════════════════════════════ */
+function GemSVG({ pct }) {
+  const stage = pct===0?0 : pct<=20?1 : pct<=45?2 : pct<=70?3 : pct<100?4 : 5;
+  return (
+    <svg width={80} height={90} viewBox="0 0 80 90" style={{overflow:"visible"}}>
+      {/* ground */}
+      <rect x={0} y={70} width={80} height={20} rx={4} fill="#8D6E63" opacity={.4}/>
+
+      {/* stage 0: plain rock */}
+      {stage===0 && (
+        <path d="M26 68 L32 48 L40 42 L48 48 L54 68 Z" fill="#9E9E9E" stroke="#757575" strokeWidth={1}/>
+      )}
+
+      {/* stage 1: cracked rock with pickaxe */}
+      {stage===1 && (<>
+        <path d="M26 68 L32 48 L40 42 L48 48 L54 68 Z" fill="#9E9E9E" stroke="#757575" strokeWidth={1}/>
+        <path d="M36 52 L40 58 L44 52" stroke="#616161" strokeWidth={1.5} fill="none"/>
+        {/* pickaxe */}
+        <line x1={58} y1={30} x2={44} y2={50} stroke="#795548" strokeWidth={2.5} strokeLinecap="round"/>
+        <path d="M56 28 L62 24 L58 34 Z" fill="#78909C"/>
+      </>)}
+
+      {/* stage 2: gem visible in rock */}
+      {stage===2 && (<>
+        <path d="M26 68 L32 48 L40 42 L48 48 L54 68 Z" fill="#9E9E9E" stroke="#757575" strokeWidth={1}/>
+        {/* gem peeking */}
+        <path d="M36 56 L40 48 L44 56 L42 62 L38 62 Z" fill="#E040FB" opacity={.8}/>
+        <path d="M38 54 L40 50 L42 54" fill="#EA80FC" opacity={.6}/>
+        {/* crack lines */}
+        <path d="M32 50 L36 56 M44 56 L48 50" stroke="#616161" strokeWidth={1} fill="none"/>
+        {/* small sparkle */}
+        <text x={44} y={48} fontSize={8} textAnchor="middle" opacity={.7}>✨</text>
+      </>)}
+
+      {/* stage 3: diamond extracted */}
+      {stage===3 && (<>
+        {/* rock debris */}
+        <path d="M22 68 L26 62 L30 68" fill="#BDBDBD" opacity={.5}/>
+        <path d="M50 68 L54 62 L58 68" fill="#BDBDBD" opacity={.5}/>
+        {/* diamond */}
+        <path d="M30 50 L36 38 L44 38 L50 50 L40 66 Z" fill="#CE93D8"/>
+        <path d="M36 38 L40 50 L44 38" fill="#E1BEE7" opacity={.7}/>
+        <path d="M30 50 L40 50 L40 66" fill="#BA68C8" opacity={.4}/>
+        <path d="M40 50 L50 50 L40 66" fill="#AB47BC" opacity={.3}/>
+        <text x={54} y={36} fontSize={9} textAnchor="middle" opacity={.7}>✨</text>
+      </>)}
+
+      {/* stage 4: polished gem */}
+      {stage===4 && (<>
+        {/* big polished diamond */}
+        <path d="M28 46 L34 32 L46 32 L52 46 L40 66 Z" fill="#7C4DFF" stroke="#651FFF" strokeWidth={1}/>
+        <path d="M34 32 L40 46 L46 32" fill="#B388FF" opacity={.6}/>
+        <path d="M28 46 L40 46 L40 66" fill="#6200EA" opacity={.3}/>
+        <path d="M40 46 L52 46 L40 66" fill="#651FFF" opacity={.25}/>
+        {/* shine */}
+        <path d="M36 38 L38 34 L40 38" fill="white" opacity={.5}/>
+        <text x={56} y={30} fontSize={9} textAnchor="middle" opacity={.8}>✨</text>
+        <text x={24} y={36} fontSize={8} textAnchor="middle" opacity={.6}>✨</text>
+      </>)}
+
+      {/* stage 5: crown (100%) */}
+      {stage===5 && (<>
+        {/* crown body */}
+        <path d="M20 52 L24 30 L32 44 L40 24 L48 44 L56 30 L60 52 Z" fill="#FFD600"/>
+        <rect x={20} y={52} width={40} height={10} rx={2} fill="#FFD600" stroke="#F9A825" strokeWidth={1}/>
+        {/* crown band */}
+        <rect x={20} y={52} width={40} height={4} rx={1} fill="#F9A825"/>
+        {/* gems on crown */}
+        <circle cx={32} cy={54} r={3} fill="#FF1744"/>
+        <circle cx={40} cy={54} r={3.5} fill="#2979FF"/>
+        <circle cx={48} cy={54} r={3} fill="#00E676"/>
+        {/* top gem */}
+        <path d="M37 26 L40 20 L43 26 L41 30 L39 30 Z" fill="#E040FB"/>
+        {/* sparkles */}
+        {[[12,24],[68,22],[72,48],[8,50],[40,10]].map(([sx,sy],i)=>(
+          <text key={i} x={sx} y={sy} fontSize={10} textAnchor="middle" opacity={.85}>✨</text>
+        ))}
+      </>)}
+    </svg>
+  );
+}
+
 /* ── theme registry ── */
 const THEMES = {
   flower:    { label:"꽃",      icon:"🌸", Component: PlantSVG },
@@ -961,6 +1208,9 @@ const THEMES = {
   butterfly: { label:"나비",    icon:"🦋", Component: ButterflySVG },
   house:     { label:"집짓기",  icon:"🏠", Component: HouseSVG },
   egg:       { label:"알 부화", icon:"🥚", Component: EggSVG },
+  moon:      { label:"달",     icon:"🌙", Component: MoonSVG },
+  sea:       { label:"바다",   icon:"🐬", Component: SeaSVG },
+  gem:       { label:"보석",   icon:"💎", Component: GemSVG },
 };
 
 /* ════════════════════════════════
