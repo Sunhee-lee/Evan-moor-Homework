@@ -996,37 +996,37 @@ function MoonSVG({ pct }) {
 
       {/* stage 0: nothing - dark sky */}
       {stage===0 && (
-        <circle cx={40} cy={42} r={20} fill="#223" opacity={.7}/>
+        <circle cx={40} cy={42} r={20} fill="#1a1a4e"/>
       )}
 
       {/* stage 1: crescent */}
       {stage===1 && (<>
         <circle cx={40} cy={42} r={20} fill="#FFE082"/>
-        <circle cx={50} cy={38} r={18} fill="rgba(15,15,60,0.85)"/>
+        <circle cx={50} cy={38} r={18} fill="#1a1a4e"/>
       </>)}
 
       {/* stage 2: waxing crescent */}
       {stage===2 && (<>
         <circle cx={40} cy={42} r={20} fill="#FFE082"/>
-        <circle cx={48} cy={40} r={16} fill="rgba(15,15,60,0.85)"/>
+        <circle cx={48} cy={40} r={16} fill="#1a1a4e"/>
       </>)}
 
       {/* stage 3: first quarter */}
       {stage===3 && (<>
         <circle cx={40} cy={42} r={20} fill="#FFECB3"/>
-        <rect x={40} y={22} width={20} height={40} fill="rgba(15,15,60,0.85)"/>
+        <rect x={40} y={22} width={20} height={40} fill="#1a1a4e"/>
       </>)}
 
       {/* stage 4: waxing gibbous */}
       {stage===4 && (<>
         <circle cx={40} cy={42} r={20} fill="#FFECB3"/>
-        <circle cx={34} cy={42} r={12} fill="rgba(15,15,60,0.6)"/>
+        <circle cx={34} cy={42} r={12} fill="#1e1e52"/>
       </>)}
 
       {/* stage 5: almost full */}
       {stage===5 && (<>
         <circle cx={40} cy={42} r={20} fill="#FFD54F"/>
-        <circle cx={36} cy={42} r={6} fill="rgba(15,15,60,0.3)"/>
+        <circle cx={36} cy={42} r={6} fill="#222258"/>
       </>)}
 
       {/* stage 6: full moon */}
