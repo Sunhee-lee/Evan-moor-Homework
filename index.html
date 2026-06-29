@@ -1935,7 +1935,7 @@ function App() {
     const hist = ls.get("hw_history",{});
     hist[TODAY] = { pct, done: isDone };
     ls.set("hw_history", hist);
-    if(isDone && !doneShown){ setShowDone(true); setDoneShown(true); if(navigator.vibrate) navigator.vibrate([200,100,200,100,400]); }
+    if(isDone && !doneShown){ setShowDone(true); setDoneShown(true); }
   },[checks, progress]);
 
   /* reset doneShown on mode change */
