@@ -106,6 +106,10 @@ const DEFAULT_LINKS = {
   comeon  : "https://waffle.nebooks.co.kr/pages/view.asp?ckey=XTkKd5ZdyPf605650MagqdP11Y514661&view=1",
   bricks  : "https://mp3.ebricks.co.kr/qr?id=286",
 };
+const ls = {
+  get:(k,d)=>{ try{return JSON.parse(localStorage.getItem(k))??d;}catch{return d;} },
+  set:(k,v)=>{ try{localStorage.setItem(k,JSON.stringify(v));}catch{} },
+};
 const LINKS_VER = 2;
 (() => {
   const savedVer = ls.get("hw_links_ver", 0);
@@ -114,10 +118,6 @@ const LINKS_VER = 2;
     ls.set("hw_links_ver", LINKS_VER);
   }
 })();
-const ls = {
-  get:(k,d)=>{ try{return JSON.parse(localStorage.getItem(k))??d;}catch{return d;} },
-  set:(k,v)=>{ try{localStorage.setItem(k,JSON.stringify(v));}catch{} },
-};
 
 function getToday() {
   const d = new Date();
