@@ -1907,8 +1907,6 @@ function App() {
     };
     document.addEventListener("visibilitychange", ()=>{ if(!document.hidden) checkDate(); });
     window.addEventListener("focus", checkDate);
-    const timer = setInterval(checkDate, 60000);
-    return ()=>{ clearInterval(timer); };
   },[]);
 
   const SHEET_URL = "https://script.google.com/macros/s/AKfycbyNAU6uau6C0ZdNGZYycypxTce7l-NIhviihcwCh1xd4LV7q8U6es2SIiAatwY1J49W6w/exec";
