@@ -1,4 +1,4 @@
-const CACHE_NAME = "evan-hw-v2";
+const CACHE_NAME = "evan-hw-v1";
 const ASSETS = [
   "./index.html",
   "./favicon.ico",
