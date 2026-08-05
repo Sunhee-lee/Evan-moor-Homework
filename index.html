@@ -102,7 +102,7 @@ const C = {
   purple:"#A29BFE", yellow:"#FFD93D", dark:"#2D3436", gray:"#636e72",
 };
 const DEFAULT_LINKS = {
-  wonders : "http://m.site.naver.com/0YEnz",
+  wonders : "https://mheducation-my.sharepoint.com/personal/choongbae_kim_mheducation_com/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fchoongbae%5Fkim%5Fmheducation%5Fcom%2FDocuments%2FWonders%20LR%20G4%7E6%2FTemporary%2Fmp3%2FWonders%20Audio%2FGrade%201%2FRW%20Workshop%2FUnit%205&ga=1",
   comeon  : "https://waffle.nebooks.co.kr/pages/view.asp?ckey=XTkKd5ZdyPf605650MagqdP11Y514661&view=1",
   bricks  : "https://mp3.ebricks.co.kr/qr?id=286",
 };
@@ -110,7 +110,7 @@ const ls = {
   get:(k,d)=>{ try{return JSON.parse(localStorage.getItem(k))??d;}catch{return d;} },
   set:(k,v)=>{ try{localStorage.setItem(k,JSON.stringify(v));}catch{} },
 };
-const LINKS_VER = 2;
+const LINKS_VER = 3;
 (() => {
   const savedVer = ls.get("hw_links_ver", 0);
   if (savedVer < LINKS_VER) {
